@@ -1,0 +1,343 @@
+body,h1,h2,h3,h4,h5,h6,p,div,ul,header{
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+li {
+  list-style: none;
+}
+header {
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #ebedee;
+  color: #0078c8;
+  padding-left: 2%;
+  -webkit-box-shadow: 3px 3px 5px 2px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 2px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 2px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+h1 {
+  padding-left: 2%;
+
+}
+h2 {
+  color: #002855;
+}
+.headline {
+  padding-bottom:3%;
+}
+.ja {
+    font-weight: lighter;
+}
+.eng {
+  font-weight: 800;
+}
+.logo {
+  border: 3px solid #0078c8;
+  border-radius: 50%;
+  height: 5em;
+  width: 5em;
+}
+.top-page {
+  display: flex;
+  justify-content: space-around;
+  padding:3%;
+  margin-top: 7%;
+}
+.news {
+  padding:3%;
+  background-color: #ecf4fb;
+  border-radius: 10px;
+}
+.news a {
+  text-decoration: none;
+  color:#0071bb;
+}
+.news a:hover {
+  border-bottom: 1px solid #0071bb;
+}
+.news li {
+  border-bottom: 1px solid #dadada;
+  padding-bottom:1%;
+}
+.date {
+  color: #002855;
+}
+.news_letter {
+  display: flex;
+  align-items: center;
+}
+.news_letter img {
+  height: 20em;
+  width: 14em;
+}
+.marketing {
+  display: flex;
+  flex-direction: column;
+}
+.twitter {
+  height: 50vh;
+  overflow-y: scroll;
+}
+.banner{
+  background-color: #0078c8;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:5%;
+}
+
+.banner a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2em;
+  display: inline-block;
+  height:100%;
+  width: 100%;
+  text-align: center;
+  padding-top:5%;
+}
+footer {
+  position: fixed;
+  bottom:0;
+  width: 100%;
+  background-color: #002855;
+  color: #fff;
+  height: 15vh;
+}
+.footer_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.footer_content p {
+  font-size: .7em;
+}
+/* @media (min-width:1201px){
+  .top-page{
+    margin-top: 10%;
+  }
+} */
+@media(max-width:1200px){
+  .top-page{
+    margin-top: 20%;
+  }
+}
+@media (max-width:992px){
+  .top-page{
+    margin-top: 25%;
+  }
+}
+/* smaller than iPad */
+@media (max-width:767px){
+  h1 {
+    font-size: 0.7em;
+  }
+  header {
+    height: 11vh;
+  }
+  .logo {
+    height: 3em;
+    width: 3em;
+  }
+  .top-page{
+    flex-direction: column;
+    margin-top: 25%;
+    margin-bottom: 31%;
+  }
+  .drawer_text , .drawer_close {
+    display: none;
+  }
+}
+/* // Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... }
+
+// Extra large devices (large desktops)
+// No media query since the extra-large breakpoint has no upper bound on its width */
+
+
+/* === Hambuerger Button's Style Paste Here === */
+/*+++ Reset +++*/
+.drawer_button * {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  font: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: left;
+  text-decoration: none;
+  list-style: none;
+}
+
+.drawer_button {
+  display: block;
+  padding: 0;
+  width: 42px;
+  height: 26px;
+  position: relative;
+  background: none;
+  border: none;
+  text-align: center;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  outline: none;
+}
+
+.drawer_button .drawer_bar {
+  display: block;
+  width: 42px;
+  height: 2px;
+  transition: all 0.2s;
+  transform-origin: 0% 0%;
+  transform: translateY(-50%);
+  position: absolute;
+  left: 0;
+}
+
+.drawer_button .drawer_bar1 {
+  top: 0;
+}
+
+.drawer_button .drawer_bar2 {
+  top: 50%;
+}
+
+.drawer_button .drawer_bar3 {
+  top: 100%;
+}
+
+.drawer_button.active .drawer_bar {
+  width: 36.77px;
+  left: 8px;
+}
+
+.drawer_button.active .drawer_bar1 {
+  transform: rotate(0.7853981634rad) translateY(-50%);
+  top: 0px;
+}
+
+.drawer_button.active .drawer_bar2 {
+  opacity: 0;
+}
+
+.drawer_button.active .drawer_bar3 {
+  transform: rotate(-0.7853981634rad) translateY(-50%);
+  top: calc(100% - 0px);
+}
+
+.drawer_button.active .drawer_menu_text {
+  display: none;
+}
+
+.drawer_button.active .drawer_close {
+  display: block;
+}
+
+.drawer_text {
+  width: 100%;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  text-align: center;
+  font-size: 10px;
+}
+
+.drawer_close {
+  letter-spacing: 0.08em;
+  display: none;
+}
+
+/*+++ Default Button Color +++*/
+.drawer_button {
+  color: #2274a5;
+}
+
+.drawer_button .drawer_bar {
+  background-color: #2274a5;
+}
+
+/* === Hambuerger Button's Style End === */
+.drawer_menu .drawer_button {
+  /*+++ Hamburger Button Position +++*/
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 1001;
+}
+.drawer_menu a {
+  color: #0071bb;
+  text-decoration: none;
+}
+.drawer_menu a:visited {
+  color: #0071bb;
+}
+.drawer_menu .drawer_bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  background-color: rgba(51, 51, 51, 0.5);
+  display: none;
+  top: 0;
+  left: 0;
+}
+.drawer_menu .drawer_nav_wrapper {
+  width: 312px;
+  height: 100%;
+  transition: all 0.2s;
+  transform: translate(312px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #FFF;
+}
+.drawer_menu .drawer_nav_wrapper.open {
+  transform: translate(0);
+}
+.drawer_menu.left .drawer_button {
+  right: auto;
+  left: 32px;
+}
+.drawer_menu.left .drawer_nav_wrapper {
+  transform: translate(-312px);
+  right: auto;
+  left: 0;
+}
+.drawer_menu.left .drawer_nav_wrapper.open {
+  transform: translate(0);
+}
+
+/*+++ Default Navigation CSS +++*/
+.drawer_menu .drawer_nav {
+  padding: 112px 24px;
+}
+.drawer_menu .drawer_nav li {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/*# sourceMappingURL=/drawer_menu.css.map */
