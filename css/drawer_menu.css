@@ -169,6 +169,9 @@ footer {
     display: flex;
     flex-direction: column;
   }
+  .white {
+    color: #fff;
+  }
 }
 /* // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { ... }
