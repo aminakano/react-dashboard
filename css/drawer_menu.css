@@ -134,6 +134,9 @@ footer {
   .top-page{
     margin-top: 25%;
   }
+  h1 {
+    width: 50%;
+  }
 }
 /* smaller than iPad */
 @media (max-width:767px){
@@ -150,10 +153,21 @@ footer {
   .top-page{
     flex-direction: column;
     margin-top: 25%;
-    margin-bottom: 31%;
+    /* margin-bottom: 31%; */
   }
   .drawer_text , .drawer_close {
     display: none;
+  }
+  footer {
+    position: inherit;
+    height: 20vh;
+  }
+  .footer_content p {
+    width: 75%;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
   }
 }
 /* // Extra small devices (portrait phones, less than 576px)
