@@ -11,7 +11,7 @@
 	<!-- fontawesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<!-- googlefonts -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
 	<link rel="icon" type="" href="./img/logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>伊勢崎市国際交流協会ウェブサイト</title>
@@ -79,6 +79,17 @@
 						リンク
 					</a>
 				</li>
+				<li>
+					<form class="" action="index.html" name="lang">
+						<select class="lang_option" name="lang_option" onchange="pageChange()">
+							<option value=""Default>Language</option>
+							<option value="./foreign/english.html">English</option>
+							<option value="./foreign/esp.html">Español</option>
+							<option value="./foreign/pt.html">Português</option>
+						</select>
+					</form>
+
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -103,7 +114,7 @@
 		</div>
 		<div class="marketing">
 			<div class="twitter">
-				<a class="twitter-timeline" href="https://twitter.com/isesakicity_lg?ref_src=twsrc%5Etfw">Tweets by isesakicity_lg</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				<a class="twitter-timeline" href="https://twitter.com/isesakicity_lg?ref_src=twsrc%5Etfw">Tweets by isesakicity_lg</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</div>
 			<div class="banner">
 				<a href="http://www7.wind.ne.jp/kokusai/news/news45.html">国際ボランティア募集中</a>
@@ -181,6 +192,7 @@
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="./js/drawer_menu.js"></script>
+	<script src="./js/main.js"></script>
 </body>
 
 </html>

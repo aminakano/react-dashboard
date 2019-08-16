@@ -23,6 +23,7 @@ header {
 h1 {
   padding-left: 2%;
   font-size: 1.2em;
+  width: 75%;
 }
 h2 {
   color: #002855;
@@ -55,7 +56,6 @@ h2 {
 }
 .news a {
   display: inline-block;
-  width: 100%;
   text-decoration: none;
   color:#0071bb;
 }
@@ -80,10 +80,14 @@ h2 {
 .marketing {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 .twitter {
   height: 50vh;
   overflow-y: scroll;
+}
+.timeline-Header {
+  display: none !important;
 }
 .banner{
   background-color: #0078c8;
@@ -122,16 +126,20 @@ footer {
 .footer_content p {
   font-size: .7em;
 }
-
+.lang_option {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  background-color:#0071bb;
+  color:#fff;
+  border: none;
+}
 @media(max-width:1200px){
   .top-page{
-    margin-top: 20%;
+    margin-top: 10%;
   }
 }
 @media (max-width:992px){
-  .top-page{
-    margin-top: 25%;
-  }
+
   h1 {
     width: 50%;
   }
