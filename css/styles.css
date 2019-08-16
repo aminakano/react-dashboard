@@ -132,7 +132,11 @@ footer {
   background-color:#0071bb;
   color:#fff;
   border: none;
+  outline: none;
+  width: 8em;
+  height: 2.5em;
 }
+
 @media(max-width:1200px){
   .top-page{
     margin-top: 10%;
