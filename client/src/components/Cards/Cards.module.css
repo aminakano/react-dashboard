@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.card {
+  margin: 1% 2% !important;
+}
+
+.image {
+  width: 2rem;
+}
+
+@media (max-width: 770px) {
+  .card {
+    margin: 2% 0 !important;
+  }
+}
