@@ -8,6 +8,8 @@
 
 .card {
   margin: 2% 1% !important;
+  /* max-height: 50vh; */
+  overflow-y: auto;
 }
 
 .image {

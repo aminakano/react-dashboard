@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./src/images/icon.png" width="400">
+<img src="./client/public/icon.png" width="400">
 </P>
 
 # React Dashboard

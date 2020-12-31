@@ -2,6 +2,21 @@
   background-color: #fff !important;
 }
 
+.title {
+  color: #333;
+  font-weight: 600 !important;
+}
+
+.img {
+  width: 2rem;
+  margin-right: 0.5rem;
+}
+
 .menu {
   color: #727cf5;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
 }

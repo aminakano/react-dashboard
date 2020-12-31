@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import EmbedTwitter from "../EmbedTwitter/EmbedTwitter"
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
@@ -68,6 +69,41 @@ const Cards = ({ data }) => {
                 </TableBody>
               </Table>
           </TableContainer>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5">This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+          </CardContent>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5">This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+          </CardContent>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <EmbedTwitter id="swissborg" name="Swissborg"/>
+          </CardContent>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5">This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+          </CardContent>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5">This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+          </CardContent>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5">This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+          </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
