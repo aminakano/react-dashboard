@@ -14,3 +14,8 @@ This project is a customised version of [Create React App](https://github.com/fa
 - CSS reset
 - CSS module
 - Axios
+
+## References
+
+- Embed Twitter <https://dev.to/heymarkkop/embed-twitter-widget-on-reactjs-1768>
+- Multiple class names <https://stackoverflow.com/questions/34521797/how-to-add-multiple-classes-to-a-reactjs-component>

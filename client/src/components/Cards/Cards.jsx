@@ -16,16 +16,16 @@ const Cards = ({ data }) => {
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+        <Grid item component={Card} xs={12} md={3} lg={2} className={styles.card}>
           <CardContent>
             <Typography variant="h5">This is my card</Typography>
             <Typography variant="body2">Hey!</Typography>
             <img src={img} alt="Diamond" />
           </CardContent>
         </Grid>
-        <Grid item md={6} lg={4} component={Card} className={styles.card}>
+        <Grid item xs={12} md={3} lg={4} component={Card} className={styles.card}>
           <Typography variant="h5">Today's Crypto Prices</Typography>
-          <TableContainer >
+          <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>

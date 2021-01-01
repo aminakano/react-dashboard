@@ -7,9 +7,9 @@
 }
 
 .card {
-  margin: 2% 1% !important;
-  /* max-height: 50vh; */
-  overflow-y: auto;
+  margin: 2% 1% auto !important;
+  height: 500px;
+  overflow-y: scroll !important;
 }
 
 .image {
