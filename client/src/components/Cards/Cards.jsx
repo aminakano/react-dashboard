@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
-import EmbedTwitter from "../EmbedTwitter/EmbedTwitter";
-import TableCard from "../TableCard/TableCard";
+import { EmbedTwitter, TableCard, Coin } from "../../components";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
@@ -16,21 +15,20 @@ const Cards = ({ data }) => {
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item component={Card} xs={12} md={3} lg={2} className={styles.card}>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
             <Typography variant="h5">This is my card</Typography>
             <Typography variant="body2">Hey!</Typography>
             <img src={img} alt="Diamond" />
           </CardContent>
         </Grid>
-        <Grid item xs={12} md={3} lg={4} component={Card} className={styles.card}>
+        <Grid item xs={12} md={4} component={Card} className={styles.card}>
           <Typography variant="h5">Today's Crypto Prices</Typography>
           <TableCard arr={arr}/>
         </Grid>
-        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+        <Grid item component={Card} xs={12} md={2} className={styles.card}>
           <CardContent>
-            <Typography variant="h5">This is my card</Typography>
-            <Typography variant="body2">Hey!</Typography>
+            <Coin />
           </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
