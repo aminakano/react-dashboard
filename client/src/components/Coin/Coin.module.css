@@ -6,6 +6,15 @@
   font-weight: 600 !important;
 }
 
+.subtitle {
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+
+.label {
+  color: #58667e;
+}
+
 .rank {
   background-color:#808a9d;
   color: #fff;
@@ -15,4 +24,8 @@
 
 .price {
   font-weight: 600 !important;
+}
+
+.spacer {
+  margin-top: 0.5rem !important;
 }

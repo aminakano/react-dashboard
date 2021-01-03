@@ -12,6 +12,10 @@
   overflow-y: scroll !important;
 }
 
+.title {
+  font-weight: 600 !important;
+}
+
 .image {
   width: 2rem;
   margin-right: 1rem;
