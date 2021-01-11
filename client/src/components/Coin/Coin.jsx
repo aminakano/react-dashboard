@@ -8,7 +8,7 @@ export class Coin extends Component {
    state = {
     data: {},
     basePrice: 1,
-    usdPrice: ""
+    usdPrice: 1
   }
 
   async componentDidMount() {
@@ -20,11 +20,15 @@ export class Coin extends Component {
     this.setState({ basePrice: e.target.value })
   }
 
+  handleChangeUS = (e) => {
+    this.setState({ usdPrice: e.target.value })
+  }
+
   formatter = (num) => num.toFixed(3).toLocaleString();
 
  
   render() {
-    const { data: { name, image, market_data, market_cap_rank }, basePrice } = this.state
+    const { data: { name, image, market_data, market_cap_rank }, basePrice, usdPrice } = this.state
     const thumb = !image ? null : image.small
 
     let currentPrice, high24, low24, priceChange;
@@ -113,6 +117,13 @@ export class Coin extends Component {
               </FormControl>
               <Typography variant="body1" className={styles.label}>
                 {this.formatter(basePrice * currentPrice)} USD
+              </Typography>
+              <FormControl>
+                <InputLabel htmlFor="component-base2">USD</InputLabel>
+                <Input id="component-base2" value={usdPrice} onChange={this.handleChangeUS}/>
+              </FormControl>
+              <Typography variant="body1" className={styles.label}>
+                {this.formatter(usdPrice / currentPrice)} NEXO
               </Typography>
             </Grid>
           </Grid>

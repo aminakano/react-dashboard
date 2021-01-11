@@ -9,7 +9,7 @@ const Cards = ({ data }) => {
   if(!data) {
     return "Loading..."
   }
-  console.log(data);
+
   const arr = Array.from(data);
 
   return (
