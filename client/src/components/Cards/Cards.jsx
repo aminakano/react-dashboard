@@ -28,7 +28,7 @@ const Cards = ({ data }) => {
         </Grid>
         <Grid item component={Card} xs={12} md={2} className={styles.card}>
           <CardContent>
-            <Coin />
+            <Coin coinName="nexo" />
           </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>

@@ -5,14 +5,17 @@ import { Grid, Typography, FormControl, InputLabel, Input } from "@material-ui/c
 import styles from "./Coin.module.css";
 
 export class Coin extends Component {
-   state = {
-    data: {},
-    basePrice: 1,
-    usdPrice: 1
-  }
+   constructor(props) {
+     super(props)
+     this.state = {
+        data: {},
+        basePrice: 1,
+        usdPrice: 1
+      }
+   }
 
   async componentDidMount() {
-    const fetchedData = await fetchCoinData("nexo");
+    const fetchedData = await fetchCoinData(this.props.coinName);
     this.setState({ data: fetchedData });
   }
 
