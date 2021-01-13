@@ -4,29 +4,7 @@ import { EmbedTwitter, TableCard, Coin, AssetTable } from "../../components";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
-
-const myHoldings = [
-  {
-    name: "chsb",
-    amount: "50942.52"
-  },
-  {
-    name: "nexo",
-    amount: "3150.32"
-  },
-  {
-    name: "paxg",
-    amount: "0.2952"
-  },
-  {
-    name: "xlm",
-    amount: "1998.45"
-  },
-  {
-    name: "trx",
-    amount: "2556"
-  },
-];
+import { myHoldings } from "../myData";
 
 const Cards = ({ data }) => {
   if(!data) {
@@ -36,18 +14,25 @@ const Cards = ({ data }) => {
   const arr = Array.from(data);
 
   let filteredArr = []
-  myHoldings.forEach(item => {
-    console.log(item.amount);
-  })
-  arr.forEach(item => 
-      (item.symbol === "chsb" 
-        || item.symbol === "nexo"
-        || item.symbol === "trx"
-        || item.symbol === "paxg"
-        || item.symbol === "xlm"
-        ) ? filteredArr.push(item) : null
-    )
-  console.log(filteredArr);
+  for (let i =0; i < arr.length; i ++) {
+    for (let j =0; j < myHoldings.length; j++) {
+      if(arr[i].symbol === myHoldings[j].name) {
+        filteredArr.push(arr[i])
+        // filteredArr[j].holdings = myHoldings[j].amount
+      }
+    }
+  }
+
+
+  // arr.forEach(item => 
+  //     (item.symbol === "chsb" 
+  //       || item.symbol === "nexo"
+  //       || item.symbol === "trx"
+  //       || item.symbol === "paxg"
+  //       || item.symbol === "xlm"
+  //       ) ? filteredArr.push(item) : null
+  //   )
+  // console.log(filteredArr);
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
