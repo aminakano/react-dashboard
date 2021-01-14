@@ -17,29 +17,22 @@ const Cards = ({ data }) => {
   for (let i =0; i < arr.length; i ++) {
     for (let j =0; j < myHoldings.length; j++) {
       if(arr[i].symbol === myHoldings[j].name) {
-        filteredArr.push(arr[i])
-        // filteredArr[j].holdings = myHoldings[j].amount
+        let newObj = arr[i]
+        newObj.holdings = myHoldings[j].amount
+        newObj.holding_price = newObj.current_price * newObj.holdings
+        filteredArr.push(newObj)
       }
     }
   }
 
+  filteredArr.sort((a, b) => b.holding_price - a.holding_price)
 
-  // arr.forEach(item => 
-  //     (item.symbol === "chsb" 
-  //       || item.symbol === "nexo"
-  //       || item.symbol === "trx"
-  //       || item.symbol === "paxg"
-  //       || item.symbol === "xlm"
-  //       ) ? filteredArr.push(item) : null
-  //   )
-  // console.log(filteredArr);
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
         <Grid item component={Card} xs={12} md={4} className={styles.card}>
-          <CardContent>
-            <AssetTable arr={filteredArr} />
-          </CardContent>
+          <Typography variant="h5" className={styles.title}>Your Assets</Typography>
+          <AssetTable arr={filteredArr} />
         </Grid>
         <Grid item xs={12} md={3} component={Card} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Today's Crypto Prices</Typography>

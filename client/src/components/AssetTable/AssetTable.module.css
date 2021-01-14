@@ -1,4 +1,12 @@
 .image {
-  width: 2rem;
+  width: 1.5rem;
   margin-right: 1rem;
+}
+
+.price {
+  font-weight: 600 !important;
+}
+
+.label {
+  color: #58667e;
 }

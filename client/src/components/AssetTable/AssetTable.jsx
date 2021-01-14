@@ -40,7 +40,10 @@ const AssetTable = ({ arr }) => {
                 ${item.current_price.toLocaleString()}
               </TableCell>
               <TableCell component="th" scope="row">
-                ${item.current_price.toLocaleString()}
+                <Grid container direction="column">
+                  <Grid item className={styles.price}>${item.holding_price.toLocaleString()}</Grid>
+                  <Grid item className={styles.label}>{item.holdings.toLocaleString()}</Grid>
+                </Grid>
               </TableCell>
               <TableCell component="th" scope="row">
                 {!item.price_change_percentage_24h ? "-" : 
