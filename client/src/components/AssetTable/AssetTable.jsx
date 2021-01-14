@@ -30,7 +30,7 @@ const AssetTable = ({ arr }) => {
                       {item.name}
                     </Typography>
                   </Grid>
-                  <Grid item>
+                  <Grid item className={styles.label}>
                     {item.symbol.toUpperCase()}
                   </Grid>
                 </Grid>

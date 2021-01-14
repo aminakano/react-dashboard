@@ -20,10 +20,12 @@ export class Coin extends Component {
   }
 
   handleChange = (e) => {
+    if (e.target.value < 0 || isNaN(e.target.value)) return
     this.setState({ basePrice: e.target.value })
   }
 
   handleChangeUS = (e) => {
+    if (e.target.value < 0 || isNaN(e.target.value)) return
     this.setState({ usdPrice: e.target.value })
   }
 
@@ -116,7 +118,7 @@ export class Coin extends Component {
             <Grid item>
               <FormControl>
                 <InputLabel htmlFor="component-base">{name}</InputLabel>
-                <Input id="component-base" value={basePrice} onChange={this.handleChange}/>
+                <Input id="component-base" min="0" value={basePrice} onChange={this.handleChange}/>
               </FormControl>
               <Typography variant="body1" className={styles.label}>
                 {this.formatter(basePrice * currentPrice)} USD

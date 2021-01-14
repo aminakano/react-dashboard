@@ -5,7 +5,7 @@ export const myHoldings = [
   },
   {
     name: "nexo",
-    amount: 3150.32,
+    amount: 3157.26,
   },
   {
     name: "paxg",
@@ -13,7 +13,7 @@ export const myHoldings = [
   },
   {
     name: "xlm",
-    amount: 1998.4,
+    amount: 2102.77,
   },
   {
     name: "trx",
