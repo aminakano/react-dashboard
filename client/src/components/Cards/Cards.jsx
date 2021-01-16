@@ -25,13 +25,17 @@ const Cards = ({ data }) => {
     }
   }
 
-  filteredArr.sort((a, b) => b.holding_price - a.holding_price)
+  filteredArr.sort((a, b) => b.holding_price - a.holding_price);
+
+  let counter = 0;
+  filteredArr.forEach(val => counter += val.holding_price);
 
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
         <Grid item component={Card} xs={12} md={4} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Your Assets</Typography>
+          <Typography variant="h4" align="right" className={styles.title}>${counter.toFixed(3)}</Typography>
           <AssetTable arr={filteredArr} />
         </Grid>
         <Grid item xs={12} md={3} component={Card} className={styles.card}>
