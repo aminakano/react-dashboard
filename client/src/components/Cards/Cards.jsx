@@ -29,13 +29,16 @@ const Cards = ({ data }) => {
 
   let counter = 0;
   filteredArr.forEach(val => counter += val.holding_price);
+  counter = counter.toLocaleString().split(".");
 
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
         <Grid item component={Card} xs={12} md={4} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Your Assets</Typography>
-          <Typography variant="h4" align="right" className={styles.title}>${counter.toFixed(3)}</Typography>
+          <Typography variant="h4" align="right" className={styles.title}>
+            ${counter[0]}.<span className={styles.decimal}>{counter[1]}</span>
+          </Typography>
           <AssetTable arr={filteredArr} />
         </Grid>
         <Grid item xs={12} md={3} component={Card} className={styles.card}>

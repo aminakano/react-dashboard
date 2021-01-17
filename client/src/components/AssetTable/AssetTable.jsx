@@ -42,7 +42,7 @@ const AssetTable = ({ arr }) => {
               <TableCell component="th" scope="row">
                 <Grid container direction="column">
                   <Grid item className={styles.price}>${item.holding_price.toLocaleString()}</Grid>
-                  <Grid item className={styles.label}>{item.holdings.toLocaleString()}</Grid>
+                  <Grid item className={styles.label}>{item.holdings.toLocaleString()} {item.symbol.toUpperCase()}</Grid>
                 </Grid>
               </TableCell>
               <TableCell component="th" scope="row">
