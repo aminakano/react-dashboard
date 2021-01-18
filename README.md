@@ -19,3 +19,5 @@ This project is a customised version of [Create React App](https://github.com/fa
 
 - Embed Twitter <https://dev.to/heymarkkop/embed-twitter-widget-on-reactjs-1768>
 - Multiple class names <https://stackoverflow.com/questions/34521797/how-to-add-multiple-classes-to-a-reactjs-component>
+- How to conditionally render a React component that uses hooks <https://stackoverflow.com/questions/60289813/how-to-conditionally-render-a-react-component-that-uses-hooks>
+- Returning Multiple Values from a Function <https://www.javascripttutorial.net/javascript-return-multiple-values/>

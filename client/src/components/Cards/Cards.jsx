@@ -1,35 +1,33 @@
-import React from 'react';
-import { Card, CardContent, Typography, Grid } from "@material-ui/core";
+import React, { useState } from 'react';
+import { Card, CardContent, Typography, Grid, Dialog, DialogTitle } from "@material-ui/core";
 import { EmbedTwitter, TableCard, Coin, AssetTable } from "../../components";
+import { filterArr } from "../../api/methods";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
 import { myHoldings } from "../myData";
 
+import { MyButton } from "../../util/MyButton";
+import EditIcon from "@material-ui/icons/Edit";
+
+
 const Cards = ({ data }) => {
+  const [open, setOpen] = useState(false)
   if(!data) {
     return "Loading..."
   }
 
-  const arr = Array.from(data);
-
-  let filteredArr = []
-  for (let i =0; i < arr.length; i ++) {
-    for (let j =0; j < myHoldings.length; j++) {
-      if(arr[i].symbol === myHoldings[j].name) {
-        let newObj = arr[i]
-        newObj.holdings = myHoldings[j].amount
-        newObj.holding_price = newObj.current_price * newObj.holdings
-        filteredArr.push(newObj)
-      }
-    }
+  const handleOpen = () => {
+    setOpen(true);
   }
 
-  filteredArr.sort((a, b) => b.holding_price - a.holding_price);
+  const handleClose = () => {
+    setOpen(false);
+  }
 
-  let counter = 0;
-  filteredArr.forEach(val => counter += val.holding_price);
-  counter = counter.toLocaleString().split(".");
+  const arr = Array.from(data);
+
+  let { filteredArr, counter } = filterArr(arr, myHoldings);
 
   return (
     <div className={styles.container}>
@@ -47,6 +45,21 @@ const Cards = ({ data }) => {
         </Grid>
         <Grid item component={Card} xs={12} md={2} className={styles.card}>
           <CardContent>
+            <MyButton
+              tip="Edit coin"
+              onClick={handleOpen}
+              btnClassName={styles.button}>
+              <EditIcon className={styles.editIcon}/>
+            </MyButton>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              fullWidth
+              maxWidth="sm"
+            >
+              <DialogTitle>Set your coin to watch</DialogTitle>
+              hello
+            </Dialog>
             <Coin coinName="nexo" />
           </CardContent>
         </Grid>
