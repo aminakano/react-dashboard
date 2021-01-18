@@ -27,6 +27,7 @@ export const fetchCoinData = async (coin) => {
 export const fetchCoins = async () => {
   try {
     const { data } = await axios.get(`${url}list`);
+
     return data;
   } catch (err) {
     console.log(err);

@@ -4,3 +4,4 @@ export { default as EmbedTwitter } from "./EmbedTwitter/EmbedTwitter";
 export { default as TableCard } from "./TableCard/TableCard";
 export { default as AssetTable } from "./AssetTable/AssetTable";
 export { default as Coin } from "./Coin/Coin";
+export { default as CoinPicker } from "./CoinPicker/CoinPicker";

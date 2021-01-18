@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Grid, Dialog, DialogTitle } from "@material-ui/core";
-import { EmbedTwitter, TableCard, Coin, AssetTable } from "../../components";
+import { Card, CardContent, Typography, Grid, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
+import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker } from "../../components";
 import { filterArr } from "../../api/methods";
 import img from "../../images/icon.png";
 
@@ -57,8 +57,10 @@ const Cards = ({ data }) => {
               fullWidth
               maxWidth="sm"
             >
-              <DialogTitle>Set your coin to watch</DialogTitle>
-              hello
+              <DialogContent>
+                <DialogTitle>Set your coin to watch</DialogTitle>
+                <CoinPicker />
+              </DialogContent>
             </Dialog>
             <Coin coinName="nexo" />
           </CardContent>
