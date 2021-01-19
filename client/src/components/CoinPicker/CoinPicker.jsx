@@ -7,37 +7,36 @@ export class CoinPicker extends Component {
   state = {
     query: '',
     data: [],
-    searchString:[]
+    filteredData:[]
   }
 
   async componentDidMount() {
-    const fetchedData = await fetchCoins();
-    this.setState({ data: fetchedData, searchString: fetchedData });
-    console.log(fetchedData);
-    console.log(this.state.data);
-    console.log(this.state.query);
+    const data = await fetchCoins();
+    const { query } = this.state;
+    const filteredData = data.filter(el => 
+        el.name.toLowerCase().includes(query.toLowerCase())     
+      )
+    this.setState({ data, filteredData })
   }
 
   handleInputChange = e => {
-    this.setState({ query: e.target.value }, this.filterArr())
-    // this.setState({ query: e.target.value })
-    console.log(this.state.query)
-    console.log(e.target.value);
+    const query = e.target.value;
+    this.setState(prevState => {
+      const filteredData = prevState.data.filter(el => 
+        (el.name.toLowerCase().includes(query.toLowerCase()) || 
+          el.symbol.toLowerCase().includes(query.toLowerCase())
+        )
+      )
+      console.log({query, filteredData});
+      return {
+        query,
+        filteredData
+      }
+    })
   }
-
-  filterArr = () => {
-    let searchString = this.state.query;
-    let responseData = this.state.data;
-    console.log(searchString);
-
-    if(searchString.length > 0) {
-      responseData = responseData.filter(searchString);
-      this.setState({ responseData });
-    }
-  }
-
   
   render() {
+    const { query, filteredData } = this.state;
     return (
       <>
         <FormControl>
@@ -45,8 +44,9 @@ export class CoinPicker extends Component {
           <Input onChange={this.handleInputChange}/>
         </FormControl>
         <div>
-          mapping data
-          {/* {this.state.responseData.map(i => <p>{i.name}</p>)} */}
+          {(query && filteredData.length < 50) ? filteredData.map(i => 
+            <p key={i.symbol}>{i.name}</p> 
+          ): null}
         </div>
       </>
     )
