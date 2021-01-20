@@ -27,17 +27,13 @@ export class CoinPicker extends Component {
           el.symbol.toLowerCase().includes(query.toLowerCase())
         )
       )
-      console.log({query, filteredData});
+      
       return {
         query,
         filteredData
       }
     })
   }
-
-  // getCoinID = e => {
-  //   console.log(e.target.id);
-  // }
   
   render() {
     const { query, filteredData } = this.state;

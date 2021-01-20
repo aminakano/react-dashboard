@@ -19,6 +19,13 @@ export class Coin extends Component {
     this.setState({ data: fetchedData });
   }
 
+  async componentDidUpdate(prevProps) {
+    if(this.props.coinName !== prevProps.coinName) {
+      const fetchedData = await fetchCoinData(this.props.coinName);
+      this.setState({ data: fetchedData });
+    }
+  }
+
   handleChange = (e) => {
     if (e.target.value < 0 || isNaN(e.target.value)) return
     this.setState({ basePrice: e.target.value })
@@ -33,8 +40,9 @@ export class Coin extends Component {
 
  
   render() {
-    const { data: { name, image, market_data, market_cap_rank }, basePrice, usdPrice } = this.state
+    const { data: { name, symbol, image, market_data, market_cap_rank }, basePrice, usdPrice } = this.state
     const thumb = !image ? null : image.small
+    const sym = !symbol ? null : symbol.toUpperCase()
 
     let currentPrice, high24, low24, priceChange;
     if(market_data) {
@@ -60,7 +68,7 @@ export class Coin extends Component {
                 </Grid>
                 <Grid item>
                   <Typography variant="body2">
-                    {name}
+                    {sym}
                   </Typography>
                 </Grid>
               </Grid> 
@@ -117,7 +125,7 @@ export class Coin extends Component {
             </Grid>
             <Grid item>
               <FormControl>
-                <InputLabel htmlFor="component-base">{name}</InputLabel>
+                <InputLabel htmlFor="component-base">{sym}</InputLabel>
                 <Input id="component-base" min="0" value={basePrice} onChange={this.handleChange}/>
               </FormControl>
               <Typography variant="body1" className={styles.label}>
@@ -128,7 +136,7 @@ export class Coin extends Component {
                 <Input id="component-base2" value={usdPrice} onChange={this.handleChangeUS}/>
               </FormControl>
               <Typography variant="body1" className={styles.label}>
-                {this.formatter(usdPrice / currentPrice)} NEXO
+                {this.formatter(usdPrice / currentPrice)} {sym}
               </Typography>
             </Grid>
           </Grid>
