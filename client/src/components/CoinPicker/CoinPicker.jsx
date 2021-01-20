@@ -4,11 +4,11 @@ import { fetchCoins } from "../../api";
 
 
 export class CoinPicker extends Component {
-  state = {
-    query: '',
-    data: [],
-    filteredData:[]
-  }
+    state = {
+      query: '',
+      data: [],
+      filteredData:[]
+    }
 
   async componentDidMount() {
     const data = await fetchCoins();
@@ -34,6 +34,10 @@ export class CoinPicker extends Component {
       }
     })
   }
+
+  // getCoinID = e => {
+  //   console.log(e.target.id);
+  // }
   
   render() {
     const { query, filteredData } = this.state;
@@ -44,8 +48,8 @@ export class CoinPicker extends Component {
           <Input onChange={this.handleInputChange}/>
         </FormControl>
         <div>
-          {(query && filteredData.length < 50) ? filteredData.map(i => 
-            <p key={i.symbol}>{i.name}</p> 
+          {(query && filteredData.length < 100) ? filteredData.map(i => 
+            <p key={i.id} id={i.id} onClick={this.props.getCoinID}>{i.name}</p> 
           ): null}
         </div>
       </>

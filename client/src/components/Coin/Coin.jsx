@@ -10,7 +10,7 @@ export class Coin extends Component {
      this.state = {
         data: {},
         basePrice: 1,
-        usdPrice: 1
+        usdPrice: 1,
       }
    }
 

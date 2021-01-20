@@ -13,6 +13,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 const Cards = ({ data }) => {
   const [open, setOpen] = useState(false)
+  const [coin, setCoin] = useState("swissborg")
   if(!data) {
     return "Loading..."
   }
@@ -25,6 +26,11 @@ const Cards = ({ data }) => {
     setOpen(false);
   }
 
+  const getCoinID  = e => {
+    setCoin(e.target.id);
+    console.log(coin);
+  }
+  console.log(coin);
   const arr = Array.from(data);
 
   let { filteredArr, counter } = filterArr(arr, myHoldings);
@@ -59,10 +65,10 @@ const Cards = ({ data }) => {
             >
               <DialogContent>
                 <DialogTitle>Set your coin to watch</DialogTitle>
-                <CoinPicker />
+                <CoinPicker getCoinID={getCoinID}/>
               </DialogContent>
             </Dialog>
-            <Coin coinName="nexo" />
+            <Coin coinName={coin} />
           </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
@@ -74,7 +80,7 @@ const Cards = ({ data }) => {
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
-            <EmbedTwitter id="swissborg" name="Swissborg"/>
+            <EmbedTwitter id="NexoFinance" name="Nexo"/>
           </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
