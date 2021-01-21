@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker } from "../../components";
 import { filterArr } from "../../api/methods";
+import { fetchAllCoins } from "../../api";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
@@ -14,6 +15,14 @@ import EditIcon from "@material-ui/icons/Edit";
 const Cards = ({ data }) => {
   const [open, setOpen] = useState(false)
   const [coin, setCoin] = useState("swissborg")
+  const [allCoin, setAllCoin] = useState(null);
+  useEffect(() => {
+    const entireList = async () => await fetchAllCoins();
+    setAllCoin(entireList)
+    console.log(entireList);
+    entireList()
+  },[])
+  console.log(allCoin);
   if(!data) {
     return "Loading..."
   }
@@ -28,11 +37,12 @@ const Cards = ({ data }) => {
 
   const getCoinID  = e => {
     setCoin(e.target.id);
-    console.log(coin);
   }
-  console.log(coin);
+
+  
   const arr = Array.from(data);
 
+console.log(arr);
   let { filteredArr, counter } = filterArr(arr, myHoldings);
 
   return (
