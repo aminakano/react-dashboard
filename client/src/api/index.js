@@ -1,4 +1,5 @@
 import axios from "axios";
+import { myHoldings } from "../components/myData";
 
 const url = "https://api.coingecko.com/api/v3/coins/";
 // const firstTenResult =  "&per_page=10&page=1"
@@ -34,29 +35,17 @@ export const fetchCoins = async () => {
   }
 };
 
-export const fetchAllCoins = async (number = 1) => {
+export const fetchAllCoins = async () => {
   try {
-    // const { data } = await axios({
-    //   method: "get",
-    //   url: `${url}markets?vs_currency=usd&per_page=150&page=${number}`,
-    //   headers: { "Access-Control-Allow-Origin": "*" },
-    // });
-
-    let coins = "swissborg%2Cnexo";
+    let coins = myHoldings.map((obj) => obj.id);
+    let idsParam = coins.join(",");
     const {
       data,
-    } = await axios.get(
-      `${url}markets?vs_currency=usd&ids=${coins}&per_page=250&page=${number}`,
-      [{ headers: { "Access-Control-Allow-Origin": "*" } }]
-    );
+    } = await axios.get(`${url}markets?vs_currency=usd&ids=${idsParam}`, [
+      { headers: { "Access-Control-Allow-Origin": "*" } },
+    ]);
 
-    // console.log("Retreiving data from API for page : " + number);
-    // console.log(data);
-    if (data.length > 0) {
-      return data.concat(await fetchAllCoins(number + 1));
-    } else {
-      return data;
-    }
+    return data;
   } catch (err) {
     console.log(err);
   }

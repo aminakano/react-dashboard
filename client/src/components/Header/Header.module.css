@@ -1,5 +1,7 @@
 .header {
   background-color: #fff !important;
+  position: fixed !important;
+  top: 0;
 }
 
 .title {

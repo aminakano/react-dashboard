@@ -15,17 +15,17 @@ import EditIcon from "@material-ui/icons/Edit";
 const Cards = ({ data }) => {
   const [open, setOpen] = useState(false)
   const [coin, setCoin] = useState("swissborg")
-  const [allCoin, setAllCoin] = useState(null);
+  const [holdingTokens, setHoldingTokens] = useState(null);
   useEffect(() => {
     const entireList = async () => await fetchAllCoins();
     const getEntireList = async () => {
-      const allCoins = await entireList()
-      console.log(allCoins);
+      const coins = await entireList()
+      setHoldingTokens(coins)
     }
     getEntireList()
   },[])
 
-  if(!data) {
+  if(!data || !holdingTokens) {
     return "Loading..."
   }
 
@@ -40,12 +40,11 @@ const Cards = ({ data }) => {
   const getCoinID  = e => {
     setCoin(e.target.id);
   }
-
   
   const arr = Array.from(data);
 
-console.log(arr);
-  let { filteredArr, counter } = filterArr(arr, myHoldings);
+  let { filteredArr, counter } = filterArr(holdingTokens, myHoldings);
+  
 
   return (
     <div className={styles.container}>
