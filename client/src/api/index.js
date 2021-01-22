@@ -41,10 +41,12 @@ export const fetchAllCoins = async (number = 1) => {
     //   url: `${url}markets?vs_currency=usd&per_page=150&page=${number}`,
     //   headers: { "Access-Control-Allow-Origin": "*" },
     // });
+
+    let coins = "swissborg%2Cnexo";
     const {
       data,
     } = await axios.get(
-      `${url}markets?vs_currency=usd&per_page=150&page=${number}`,
+      `${url}markets?vs_currency=usd&ids=${coins}&per_page=250&page=${number}`,
       [{ headers: { "Access-Control-Allow-Origin": "*" } }]
     );
 

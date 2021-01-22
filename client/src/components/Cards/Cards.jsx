@@ -18,11 +18,13 @@ const Cards = ({ data }) => {
   const [allCoin, setAllCoin] = useState(null);
   useEffect(() => {
     const entireList = async () => await fetchAllCoins();
-    setAllCoin(entireList)
-    console.log(entireList);
-    entireList()
+    const getEntireList = async () => {
+      const allCoins = await entireList()
+      console.log(allCoins);
+    }
+    getEntireList()
   },[])
-  console.log(allCoin);
+
   if(!data) {
     return "Loading..."
   }
