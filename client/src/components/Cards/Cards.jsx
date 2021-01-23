@@ -13,17 +13,13 @@ import EditIcon from "@material-ui/icons/Edit";
 
 
 const Cards = ({ data }) => {
-  const [open, setOpen] = useState(false)
-  const [coin, setCoin] = useState("swissborg")
+  const [open, setOpen] = useState(false);
+  const [coin, setCoin] = useState("swissborg");
   const [holdingTokens, setHoldingTokens] = useState(null);
   useEffect(() => {
-    const entireList = async () => await fetchMyHoldings();
-    const getEntireList = async () => {
-      const coins = await entireList()
-      setHoldingTokens(coins)
-    }
-    getEntireList()
-  },[])
+    const fetchAPI = async () => setHoldingTokens(await fetchMyHoldings());
+    fetchAPI();
+  },[setHoldingTokens]);
 
   if(!data || !holdingTokens) {
     return "Loading..."
