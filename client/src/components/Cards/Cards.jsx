@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker } from "../../components";
 import { filterArr } from "../../api/methods";
-import { fetchAllCoins } from "../../api";
+import { fetchMyHoldings } from "../../api";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
@@ -17,7 +17,7 @@ const Cards = ({ data }) => {
   const [coin, setCoin] = useState("swissborg")
   const [holdingTokens, setHoldingTokens] = useState(null);
   useEffect(() => {
-    const entireList = async () => await fetchAllCoins();
+    const entireList = async () => await fetchMyHoldings();
     const getEntireList = async () => {
       const coins = await entireList()
       setHoldingTokens(coins)

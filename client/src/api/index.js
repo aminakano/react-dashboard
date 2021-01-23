@@ -35,7 +35,7 @@ export const fetchCoins = async () => {
   }
 };
 
-export const fetchAllCoins = async () => {
+export const fetchMyHoldings = async () => {
   try {
     let coins = myHoldings.map((obj) => obj.id);
     let idsParam = coins.join(",");
@@ -51,7 +51,8 @@ export const fetchAllCoins = async () => {
   }
 };
 
+// Test functions
 // (async () => {
-//   const entireList = await fetchAllCoins();
+//   const entireList = await fetchMyHoldings();
 //   console.log(entireList);
 // })();
