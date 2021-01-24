@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
-import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker } from "../../components";
+import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker, Chart } from "../../components";
 import { filterArr } from "../../api/methods";
 import { fetchMyHoldings } from "../../api";
 import img from "../../images/icon.png";
@@ -41,7 +41,7 @@ const Cards = ({ data }) => {
 
   let { filteredArr, counter } = filterArr(holdingTokens, myHoldings);
   
-
+  console.log(filteredArr);
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -91,10 +91,10 @@ const Cards = ({ data }) => {
           </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
-          <CardContent>
-            <Typography variant="h5">This is my card</Typography>
-            <Typography variant="body2">Hey!</Typography>
-          </CardContent>
+          <Typography variant="h5" className={styles.title}>Portfolio</Typography>
+          {/* <CardContent> */}
+            <Chart arr={filteredArr} />
+          {/* </CardContent> */}
         </Grid>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
