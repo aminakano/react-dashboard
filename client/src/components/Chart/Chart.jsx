@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pie, defaults, Doughnut } from "react-chartjs-2";
+import { defaults, Doughnut } from "react-chartjs-2";
 import styles from "./Chart.module.css";
 
 defaults.global.defaultFontFamily = "Source Sans Pro";
@@ -32,7 +32,15 @@ const Chart = ({ arr }) => {
       }}
       options={{
         maintainAspectRatio: false,
-        legend: { display: true, position: "bottom", align: "start" },
+        legend: { 
+          display: true, 
+          position: "bottom", 
+          align: "start",
+          labels: {
+            boxWidth: 20,
+            padding: 8
+          }
+        },
       }}
     />
   )
