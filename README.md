@@ -4,20 +4,33 @@
 
 # React Dashboard
 
-This project is a customised version of [Create React App](https://github.com/facebook/create-react-app). All the unnecessary files are eliminated and basic CSS stylings with Source Sans Pro (Google Fonts) as a default font. Axios is installed for fetch API.
+This is a dashboard application using React. The purpose of this app is to display and manage your holdings of cryptocurrencies and visualise with charts and tables.
 
-## Pre-installed
+## How to use
 
-- `create-react-app`
-- Basic fold structure
-- Source Sans Pro Google Fonts
-- CSS reset
-- CSS module
-- Axios
+- `git clone` or download the project
+- `npm install` at the client directory
+- Prepare a JavaScript file called `myData.js` under Component directory which contains an array of your cryptocurrency holding data
+
+#### Example data
+
+```
+export const myHoldings = [{
+  id: "bitcoin",
+  name: "btc",
+  amount: 11111,
+}]
+```
+
+- `npm start`
 
 ## References
 
+- react-chartjs-2 <https://www.npmjs.com/package/react-chartjs-2/v/2.7.4>
 - Embed Twitter <https://dev.to/heymarkkop/embed-twitter-widget-on-reactjs-1768>
 - Multiple class names <https://stackoverflow.com/questions/34521797/how-to-add-multiple-classes-to-a-reactjs-component>
 - How to conditionally render a React component that uses hooks <https://stackoverflow.com/questions/60289813/how-to-conditionally-render-a-react-component-that-uses-hooks>
 - Returning Multiple Values from a Function <https://www.javascripttutorial.net/javascript-return-multiple-values/>
+- How to Create a Search Field in ReactJS <https://stackoverflow.com/questions/51726391/how-to-create-a-search-field-in-reactjs>
+- Retrieve entire data from paginated API recursively. <https://dev.to/nirmal_kumar/retrieve-entire-data-from-paginated-api-recursively-3pl4>
+- Javascript: How to access the return value of a Promise object <https://dev.to/ramonak/javascript-how-to-access-the-return-value-of-a-promise-object-1bck>
