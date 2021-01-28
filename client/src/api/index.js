@@ -1,5 +1,5 @@
 import axios from "axios";
-import { myHoldings } from "../components/myData";
+import { myHoldings } from "./myData";
 
 const url = "https://api.coingecko.com/api/v3/coins/";
 // const firstTenResult =  "&per_page=10&page=1"

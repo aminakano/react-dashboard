@@ -10,7 +10,9 @@ This is a dashboard application using React. The purpose of this app is to displ
 
 - `git clone` or download the project
 - `npm install` at the client directory
-- Prepare a JavaScript file called `myData.js` under Component directory which contains an array of your cryptocurrency holding data
+- Prepare a JavaScript file called `myData.js` under `src/api` directory which contains an array of your cryptocurrency holding data
+
+### Alternatively, you could also use `myDataArray.js` which contains sample data by changing its file name to `myData.js`
 
 #### Example data
 

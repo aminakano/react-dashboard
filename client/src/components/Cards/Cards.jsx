@@ -6,7 +6,7 @@ import { fetchMyHoldings } from "../../api";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
-import { myHoldings } from "../myData";
+import { myHoldings } from "../../api/myData";
 
 import { MyButton } from "../../util/MyButton";
 import EditIcon from "@material-ui/icons/Edit";
