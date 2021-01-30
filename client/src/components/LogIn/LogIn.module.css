@@ -1,0 +1,26 @@
+.form {
+  text-align: center;
+}
+
+.button {
+  margin: 1.25rem 0 !important;
+  position: relative;
+  width: 100%;
+  padding: 0.75rem 0 !important;
+  background-color: #727cf5 !important;
+  color: #fff !important;
+}
+
+.button:hover {
+  background-color: #4e5bf2 !important;
+}
+
+.progress {
+  position: absolute;
+}
+
+@media screen and (min-width: 1024px) {
+  .paper {
+    padding: 2rem !important;
+  }
+}
