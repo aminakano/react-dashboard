@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const Exercise = require("../models/exercise.model");
-let User = require("../models/user.model");
+const User = require("../models/user.model");
 
 // first endpoint for incoming http://localhost:5000/users get request
 router.route("/").get((req, res) => {
@@ -11,14 +10,73 @@ router.route("/").get((req, res) => {
 
 // for http://localhost:5000/users/add post request
 router.route("/add").post((req, res) => {
-  const username = req.body.username;
+  const { body } = req;
+  let { email } = body;
+  const { username, password, confirmPassword } = body;
 
-  const newUser = new User({ username });
+  console.log(body);
 
-  newUser
-    .save()
-    .then(() => res.json("User added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  if (!email) {
+    return res.send({
+      success: false,
+      message: "Error: Email cannot be blank.",
+    });
+  }
+
+  if (!password) {
+    return res.send({
+      success: false,
+      message: "Error: Password cannot be blank.",
+    });
+  }
+
+  if (password !== confirmPassword) {
+    return res.send({
+      success: false,
+      message: "Error: Password doesn't match.",
+    });
+  }
+
+  email = email.toLowerCase();
+  email = email.trim();
+
+  User.find({ email }, (err, previousUsers) => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Error: Server error",
+      });
+    } else if (previousUsers.length > 0) {
+      return res.send({
+        success: false,
+        message: "Error: Account already exists",
+      });
+    }
+  });
+
+  const newUser = new User();
+
+  newUser.email = email;
+  newUser.username = username;
+  newUser.password = newUser.generateHash(password);
+
+  newUser.save((err, user) => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Error: Server error",
+      });
+    }
+    return res.send({
+      success: true,
+      message: "Signed Up",
+    });
+  });
+
+  // newUser
+  //   .save()
+  //   .then(() => res.json("User added!"))
+  //   .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
