@@ -41,7 +41,6 @@ const Cards = ({ data }) => {
 
   let { filteredArr, counter } = filterArr(holdingTokens, myHoldings);
   
-  console.log(filteredArr, counter);
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">

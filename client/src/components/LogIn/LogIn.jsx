@@ -86,7 +86,7 @@ export class LogIn extends Component {
               </Button>
               <br />
               <small>
-                Are you new? <Link to="/create">Create Account</Link>
+                No account yet? <Link to="/create">Sign Up</Link>
               </small>
             </form>
             </Paper>

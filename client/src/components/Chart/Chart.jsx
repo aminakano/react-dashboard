@@ -1,6 +1,6 @@
 import React from 'react'
 import { defaults, Doughnut } from "react-chartjs-2";
-import styles from "./Chart.module.css";
+// import styles from "./Chart.module.css";
 
 defaults.global.defaultFontFamily = "Source Sans Pro";
 

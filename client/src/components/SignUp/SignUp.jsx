@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./SignUp.module.css";
 
-import axios from "axios";
-
 export class SignUp extends Component {
   constructor() {
     super();
@@ -30,10 +28,20 @@ export class SignUp extends Component {
     };
     console.log(newUserData);
 
-    axios.post("/users/add", newUserData)
-      .then(res => console.log(res.data));
+    fetch("/api/users/add", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUserData)
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log("json", json);
+    })
+    .catch(err => console.log(err))
 
-      window.location = "/"
+    // window.location = "/"
     // this.props.signupUser(newUserData, this.props.history);
   }
 
