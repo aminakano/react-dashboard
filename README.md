@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./client/public/icon.png" width="400">
+<img src="./client/public/icon.png" width=300">
 </P>
 
 # React Dashboard
@@ -36,3 +36,10 @@ export const myHoldings = [{
 - How to Create a Search Field in ReactJS <https://stackoverflow.com/questions/51726391/how-to-create-a-search-field-in-reactjs>
 - Retrieve entire data from paginated API recursively. <https://dev.to/nirmal_kumar/retrieve-entire-data-from-paginated-api-recursively-3pl4>
 - Javascript: How to access the return value of a Promise object <https://dev.to/ramonak/javascript-how-to-access-the-return-value-of-a-promise-object-1bck>
+- How To Pass Props to Components Inside React Router <https://medium.com/javascript-in-plain-english/passing-props-to-components-inside-react-router-3d26165662b1>
+
+## References (video)
+
+- Building a Login System for a MERN (MongoDB, Express.js, React.js, Node.js) Web App <https://www.youtube.com/watch?v=s1swJLYxLAA&t=165s>
+- React & Express Starter Pack For Full Stack Development <https://www.youtube.com/watch?v=v0t42xBIYIs>
+- Learn the MERN Stack - Full Tutorial (MongoDB, Express, React, Node.js) <https://www.youtube.com/watch?v=7CqJlxBYj-M&t=2190s>
