@@ -12,21 +12,23 @@ export class SignUp extends Component {
       confirmPassword: "",
       username: "",
       errors: {},
+      loading: false
     };
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
+    
     this.setState({
       loading: true,
     });
+
     const newUserData = {
       email: this.state.email,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       username: this.state.username,
     };
-    console.log(newUserData);
 
     fetch("/api/users/add", {
       method: "POST",
@@ -38,11 +40,14 @@ export class SignUp extends Component {
     .then(res => res.json())
     .then(json => {
       console.log("json", json);
+      this.setState({
+          loading: false,
+          errors: json.message,
+      })
+     return (json.success) ? window.location = "/" : null;
+ 
     })
     .catch(err => console.log(err))
-
-    // window.location = "/"
-    // this.props.signupUser(newUserData, this.props.history);
   }
 
   handleChange = (event) => {
@@ -51,7 +56,7 @@ export class SignUp extends Component {
     });
   }
   render() {
-    const { errors } = this.state;
+    const { errors, loading } = this.state;
     return (
       <div>
         <Grid container className={styles.form}>
@@ -119,12 +124,12 @@ export class SignUp extends Component {
                 type="submit"
                 variant="contained"
                 className={styles.button}
-                // disabled={loading}
+                disabled={loading}
               >
                 Sign UP
-                {/* {loading && ( */}
+                {loading && (
                   <CircularProgress className={styles.progress} size={30} />
-                {/* )} */}
+                 )}
               </Button>
               <br />
               <small>
