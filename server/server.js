@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const proxy = require("http-proxy-middleware");
 
 // Environment variables in .env file
 require("dotenv").config();
@@ -30,7 +31,7 @@ const exerciseRouter = require("./routes/exercises");
 const usersRouter = require("./routes/users");
 
 app.use("/exercises", exerciseRouter);
-app.use("/users", usersRouter);
+app.use("/api/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);

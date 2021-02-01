@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Exercise = require("../models/exercise.model");
+let Exercise = require("../models/userSession.model");
 
 // first endpoint for incoming http://localhost:5000/exercises get request
 router.route("/").get((req, res) => {

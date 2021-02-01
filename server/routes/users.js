@@ -9,7 +9,7 @@ router.route("/").get((req, res) => {
 });
 
 // for http://localhost:5000/users/add post request
-router.route("/add").post((req, res) => {
+router.route("/signup").post((req, res) => {
   const { body } = req;
   let { email } = body;
   const { username, password, confirmPassword } = body;
@@ -72,11 +72,6 @@ router.route("/add").post((req, res) => {
       message: "Signed Up",
     });
   });
-
-  // newUser
-  //   .save()
-  //   .then(() => res.json("User added!"))
-  //   .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
