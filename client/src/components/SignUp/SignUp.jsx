@@ -30,7 +30,7 @@ export class SignUp extends Component {
       username: this.state.username,
     };
 
-    fetch("/api/users/add", {
+    fetch("/api/users/signup", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -44,8 +44,8 @@ export class SignUp extends Component {
           loading: false,
           errors: json.message,
       })
+      
      return (json.success) ? window.location = "/" : null;
- 
     })
     .catch(err => console.log(err))
   }

@@ -7,3 +7,5 @@ css/zdo_drawer_menu.css.map
 css/zdo_drawer_menu.js.map
 css/zdo_drawer_menu.js
 client/src/api/myData.js
+.vscode
+.env

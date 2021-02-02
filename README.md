@@ -28,6 +28,7 @@ export const myHoldings = [{
 
 ## References
 
+- Building a Log In System for a MERN Stack <https://medium.com/@Keithweaver_/building-a-log-in-system-for-a-mern-stack-39411e9513bd>
 - react-chartjs-2 <https://www.npmjs.com/package/react-chartjs-2/v/2.7.4>
 - Embed Twitter <https://dev.to/heymarkkop/embed-twitter-widget-on-reactjs-1768>
 - Multiple class names <https://stackoverflow.com/questions/34521797/how-to-add-multiple-classes-to-a-reactjs-component>
