@@ -16,24 +16,39 @@ router.route("/signup").post((req, res) => {
 
   console.log(body);
 
+  if (!username) {
+    return res.send({
+      success: false,
+      message: {
+        username: "Error: Username cannot be blank.",
+      },
+    });
+  }
+
   if (!email) {
     return res.send({
       success: false,
-      message: "Error: Email cannot be blank.",
+      message: {
+        email: "Error: Email cannot be blank.",
+      },
     });
   }
 
   if (!password) {
     return res.send({
       success: false,
-      message: "Error: Password cannot be blank.",
+      message: {
+        password: "Error: Password cannot be blank.",
+      },
     });
   }
 
   if (password !== confirmPassword) {
     return res.send({
       success: false,
-      message: "Error: Password doesn't match.",
+      message: {
+        confirmPassword: "Error: Password doesn't match.",
+      },
     });
   }
 
@@ -47,12 +62,37 @@ router.route("/signup").post((req, res) => {
         message: "Error: Server error",
       });
     } else if (previousUsers.length > 0) {
+      console.log(previousUsers);
       return res.send({
         success: false,
-        message: "Error: Account already exists",
+        message: {
+          email: "Error: Account already exists",
+        },
       });
     }
   });
+
+  // Todo: validate username as wel as email
+
+  // const findUser = (key) => {
+  //   User.find({ key }, (err, previousUsers) => {
+  //     if (err) {
+  //       return res.send({
+  //         success: false,
+  //         message: "Error: Server error",
+  //       });
+  //     } else if (previousUsers.length > 0) {
+  //       return res.send({
+  //         success: false,
+  //         message: {
+  //           key: "Error: Account already exists",
+  //         },
+  //       });
+  //     }
+  //   });
+  // };
+
+  // findUser(email);
 
   const newUser = new User();
 
