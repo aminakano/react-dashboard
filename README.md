@@ -4,13 +4,17 @@
 
 # React Dashboard
 
-This is a dashboard application using React. The purpose of this app is to display and manage your holdings of cryptocurrencies and visualise with charts and tables.
+This is a dashboard application using React. The purpose of this app is to display and manage your holdings of cryptocurrencies and visualise with charts and tables. I chose CoinGecko API for an endpoint of this app since it is easy to use, free and API key is not required.
+
+#### CoinGecko API
+
+<https://www.coingecko.com/en/api>
 
 ## How to use
 
 - `git clone` or download the project
 - `npm install` at the client directory
-- Prepare a JavaScript file called `myData.js` under `src/api` directory which contains an array of your cryptocurrency holding data
+- Create a JavaScript file called `myData.js` under `src/api` directory which contains an array of your cryptocurrency holding data
 
 ### Alternatively, you could also use `myDataArray.js` which contains sample data by changing its file name to `myData.js`
 
@@ -23,6 +27,8 @@ export const myHoldings = [{
   amount: 11111,
 }]
 ```
+
+And `id` should correspond to coin id and `key` a symbol of a currency. IDs and symbols can be found by querying <https://api.coingecko.com/api/v3/coins/list>
 
 - `npm start`
 
