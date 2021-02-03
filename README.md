@@ -28,7 +28,7 @@ export const myHoldings = [{
 }]
 ```
 
-And `id` should correspond to coin id and `key` a symbol of a currency. IDs and symbols can be found by querying <https://api.coingecko.com/api/v3/coins/list>
+And `id` should correspond to coin id and `name` a symbol of a currency. IDs and symbols can be found by querying <https://api.coingecko.com/api/v3/coins/list>
 
 - `npm start`
 

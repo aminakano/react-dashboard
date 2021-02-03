@@ -15,40 +15,22 @@ router.route("/signup").post((req, res) => {
   const { username, password, confirmPassword } = body;
 
   console.log(body);
+  const message = {};
 
-  if (!username) {
+  // Error handling
+  if (!username || !email || !password || password !== confirmPassword) {
+    if (!username) message.username = "Error: Username cannot be blank.";
+
+    if (!email) message.email = "Error: Email cannot be blank.";
+
+    if (!password) message.password = "Error: Password cannot be blank.";
+
+    if (password !== confirmPassword)
+      message.confirmPassword = "Error: Password doesn't match.";
+
     return res.send({
       success: false,
-      message: {
-        username: "Error: Username cannot be blank.",
-      },
-    });
-  }
-
-  if (!email) {
-    return res.send({
-      success: false,
-      message: {
-        email: "Error: Email cannot be blank.",
-      },
-    });
-  }
-
-  if (!password) {
-    return res.send({
-      success: false,
-      message: {
-        password: "Error: Password cannot be blank.",
-      },
-    });
-  }
-
-  if (password !== confirmPassword) {
-    return res.send({
-      success: false,
-      message: {
-        confirmPassword: "Error: Password doesn't match.",
-      },
+      message,
     });
   }
 
