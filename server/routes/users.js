@@ -37,44 +37,49 @@ router.route("/signup").post((req, res) => {
   email = email.toLowerCase();
   email = email.trim();
 
-  User.find({ email }, (err, previousUsers) => {
-    if (err) {
-      return res.send({
-        success: false,
-        message: "Error: Server error",
-      });
-    } else if (previousUsers.length > 0) {
-      console.log(previousUsers);
-      return res.send({
-        success: false,
-        message: {
-          email: "Error: Account already exists",
-        },
-      });
-    }
-  });
+  // User.find({ email }, (err, previousUsers) => {
+  //   console.log("email:", email);
+  //   console.log("typeof email:", typeof email);
+  //   if (err) {
+  //     return res.send({
+  //       success: false,
+  //       message: "Error: Server error",
+  //     });
+  //   } else if (previousUsers.length > 0) {
+  //     console.log("prevUsers:", previousUsers);
+  //     return res.send({
+  //       success: false,
+  //       message: {
+  //         email: "Error: Account already exists",
+  //       },
+  //     });
+  //   }
+  // });
 
-  // Todo: validate username as wel as email
+  // Todo: validate username as well as email
 
-  // const findUser = (key) => {
-  //   User.find({ key }, (err, previousUsers) => {
-  //     if (err) {
-  //       return res.send({
-  //         success: false,
-  //         message: "Error: Server error",
-  //       });
-  //     } else if (previousUsers.length > 0) {
-  //       return res.send({
-  //         success: false,
-  //         message: {
-  //           key: "Error: Account already exists",
-  //         },
-  //       });
-  //     }
-  //   });
-  // };
+  const findUser = ({ key }) => {
+    console.log(key);
+    User.find(key, (err, previousUsers) => {
+      console.log(("key:", key), (err, previousUsers));
+      if (err) {
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        });
+      } else if (previousUsers.length > 0) {
+        return res.send({
+          success: false,
+          message: {
+            key: "Error: Account already exists",
+          },
+        });
+      }
+    });
+  };
 
-  // findUser(email);
+  findUser(username);
+  findUser(email);
 
   const newUser = new User();
 
