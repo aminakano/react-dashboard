@@ -58,28 +58,29 @@ router.route("/signup").post((req, res) => {
 
   // Todo: validate username as well as email
 
-  const findUser = ({ key }) => {
-    console.log(key);
-    User.find(key, (err, previousUsers) => {
-      console.log(("key:", key), (err, previousUsers));
+  const findUser = (obj) => {
+    console.log("key1:", obj);
+    User.find(obj, (err, previousUsers) => {
+      const key = Object.keys(obj);
       if (err) {
         return res.send({
           success: false,
           message: "Error: Server error",
         });
       } else if (previousUsers.length > 0) {
+        console.log("prevUsers1", previousUsers);
+        const message = {};
+        message[key] = "Error: Account already exists";
         return res.send({
           success: false,
-          message: {
-            key: "Error: Account already exists",
-          },
+          message,
         });
       }
     });
   };
 
-  findUser(username);
-  findUser(email);
+  findUser({ username });
+  findUser({ email });
 
   const newUser = new User();
 
