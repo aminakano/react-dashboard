@@ -14,6 +14,12 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json()); // allows us to parse JSON
 
+const errorHandler = (err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+};
+app.use(errorHandler);
+
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
