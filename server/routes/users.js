@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
+const UserSession = require("../models/userSession.model");
+const bcrypt = require("bcrypt");
 
 // first endpoint for incoming http://localhost:5000/users get request
 router.route("/").get((req, res) => {
@@ -8,7 +10,7 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// for http://localhost:5000/users/add post request
+// Signup endpoint - http://localhost:5000/users/add post request
 router.route("/signup").post(async (req, res, next) => {
   if (!req.body) {
     res.status(400).json({
@@ -83,6 +85,68 @@ router.route("/signup").post(async (req, res, next) => {
     return res.send({
       success: true,
       message: "Signed Up",
+    });
+  });
+});
+
+// Log in
+router.route("/login").post((req, res, next) => {
+  const { body } = req;
+  let { email } = body;
+  const { password } = body;
+
+  // Error handling
+  const message = {};
+  if (!email || !password) {
+    if (!email) message.email = "Error: Email cannot be blank.";
+
+    if (!password) message.password = "Error: Password cannot be blank.";
+
+    return res.send({
+      success: false,
+      message,
+    });
+  }
+  email = email.toLowerCase();
+  email = email.trim();
+
+  User.find({ email }, async (err, users) => {
+    const user = users[0];
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (err) {
+      console.log("err 2:", err);
+      return res.send({
+        success: false,
+        message: "Error: Server error",
+      });
+    } else if (users.length !== 1) {
+      return res.send({
+        success: false,
+        message: "Error: Invalid",
+      });
+    } else if (!passwordMatch) {
+      return res.send({
+        success: false,
+        message: "Error: Invalid",
+      });
+    }
+
+    const userSession = new UserSession();
+    userSession.userId = user._id;
+    userSession.save((err, doc) => {
+      if (err) {
+        console.log(err);
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Valid sign in",
+        token: doc._id,
+      });
     });
   });
 });
