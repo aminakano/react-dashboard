@@ -42,32 +42,11 @@ router.route("/signup").post(async (req, res, next) => {
     email = email.toLowerCase();
     email = email.trim();
 
-    // Todo: validate username as well as email
-
-    // const findUser = (obj) => {
-    //   console.log("key:", obj);
-    //   User.find(obj, (err, previousUsers) => {
-    //     const key = Object.keys(obj);
-    //     if (err) {
-    //       return res.send({
-    //         success: false,
-    //         message: "Error: Server error",
-    //       });
-    //     } else if (previousUsers.length > 0) {
-    //       console.log("prevUsers1", previousUsers);
-    //       const message = {};
-    //       message[key] = "Error: Account already exists";
-    //       return res.send({
-    //         success: false,
-    //         message,
-    //       });
-    //     }
-    //   });
-    // };
-    // findUser({ username });
-    // findUser({ email });
-
     let userExists = await User.exists({ username })
+      .then((doc) => doc)
+      .catch((err) => console.log(err));
+
+    let emailExists = await User.exists({ email })
       .then((doc) => doc)
       .catch((err) => console.log(err));
 
@@ -78,24 +57,14 @@ router.route("/signup").post(async (req, res, next) => {
         },
       });
       return;
+    } else if (emailExists) {
+      res.status(409).json({
+        message: {
+          email: "Email already exists",
+        },
+      });
+      return;
     }
-
-    // const cb = (err, doc) => {
-    //   console.log("err", err);
-    //   if (err) {
-    //     console.log(err);
-    //     res.sendStatus(500);
-    //     return;
-    //   } else {
-    //     return res.send({
-    //       success: false,
-    //       message: {
-    //         username: "Username already exists",
-    //       },
-    //     });
-    //   }
-    // };
-    // User.exists({ username }, cb(err, doc));
   }
 
   const newUser = new User();
