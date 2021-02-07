@@ -151,4 +151,70 @@ router.route("/login").post((req, res, next) => {
   });
 });
 
+// Log out
+router.route("/logout").get((req, res, next) => {
+  const { query } = req;
+  const { token } = query;
+
+  UserSession.findOneAndUpdate(
+    {
+      _id: token,
+      isDeleted: false,
+    },
+    {
+      $set: {
+        isDeleted: true,
+      },
+    },
+    null,
+    (err, sessions) => {
+      if (err) {
+        console.log(err);
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Good bye",
+      });
+    }
+  );
+});
+
+// Verify
+
+router.route("/verify").get((req, res, next) => {
+  const { query } = req;
+  const { token } = query;
+
+  UserSession.find(
+    {
+      _id: token,
+      isDeleted: false,
+    },
+    (err, sessions) => {
+      if (err) {
+        console.log(err);
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        });
+      }
+      if (sessions.length !== 1) {
+        return res.send({
+          success: false,
+          message: "Error: Invalid",
+        });
+      } else {
+        return res.send({
+          success: true,
+          message: "Good",
+        });
+      }
+    }
+  );
+});
+
 module.exports = router;
