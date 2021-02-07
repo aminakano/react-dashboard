@@ -44,11 +44,11 @@ router.route("/signup").post(async (req, res, next) => {
     email = email.toLowerCase();
     email = email.trim();
 
-    let userExists = await User.exists({ username })
+    const userExists = await User.exists({ username })
       .then((doc) => doc)
       .catch((err) => console.log(err));
 
-    let emailExists = await User.exists({ email })
+    const emailExists = await User.exists({ email })
       .then((doc) => doc)
       .catch((err) => console.log(err));
 
@@ -90,7 +90,7 @@ router.route("/signup").post(async (req, res, next) => {
 });
 
 // Log in
-router.route("/login").post((req, res, next) => {
+router.route("/login").post(async (req, res, next) => {
   const { body } = req;
   let { email } = body;
   const { password } = body;
@@ -110,6 +110,21 @@ router.route("/login").post((req, res, next) => {
   email = email.toLowerCase();
   email = email.trim();
 
+  // Check if email address input exists in db
+  const emailExists = await User.exists({ email })
+    .then((doc) => doc)
+    .catch((err) => console.log(err));
+  if (!emailExists) {
+    res.send({
+      success: false,
+      message: {
+        email: "Email not exists",
+      },
+    });
+    return;
+  }
+
+  // Check if password is correct
   User.find({ email }, async (err, users) => {
     const user = users[0];
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -128,10 +143,13 @@ router.route("/login").post((req, res, next) => {
     } else if (!passwordMatch) {
       return res.send({
         success: false,
-        message: "Error: Invalid",
+        message: {
+          password: "Error: Invalid",
+        },
       });
     }
 
+    // Create userSession and generate token
     const userSession = new UserSession();
     userSession.userId = user._id;
     userSession.save((err, doc) => {
