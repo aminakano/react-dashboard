@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { getFromStorage, setInStorage } from "../../util/storage";
 import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./LogIn.module.css";
 
@@ -11,19 +12,47 @@ export class LogIn extends Component {
       email: "",
       password: "",
       errors: {},
+      loading: false,
+      token: ""
     };
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const {email, password} = this.state;
+
     this.setState({
       loading: true,
     });
-    // const userData = {
-    //   email: this.state.email,
-    //   password: this.state.password,
-    // };
-    // this.props.LogInUser(newUserData, this.props.history);
+
+    fetch("/api/users/login", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log(`json: ${JSON.stringify(json)}`);
+      if(json.success) {
+        setInStorage("the_main_app", {token: json.token});
+        this.setState({
+          email: "",
+          password: "",
+          errors: json.message,
+          loading: false,
+          token: json.token,
+        })
+        return window.location = "/";
+      } else {
+        this.setState({
+          errors: json.message,
+          loading: false,
+        })
+      }
+    })
+    .catch(err => console.log(err))
   }
 
   handleChange = (event) => {
@@ -33,7 +62,7 @@ export class LogIn extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, loading } = this.state;
     return (
       <div>
         <Grid container className={styles.form}>
@@ -77,12 +106,12 @@ export class LogIn extends Component {
                 type="submit"
                 variant="contained"
                 className={styles.button}
-                // disabled={loading}
+                disabled={loading}
               >
                 Log In
-                {/* {loading && ( */}
+                {loading && (
                   <CircularProgress className={styles.progress} size={30} />
-                {/* )} */}
+                 )}
               </Button>
               <br />
               <small>
