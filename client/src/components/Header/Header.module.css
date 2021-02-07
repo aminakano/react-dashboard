@@ -4,6 +4,10 @@
   top: 0;
 }
 
+.logo:hover {
+  cursor: pointer;
+}
+
 .title {
   color: #333;
   font-weight: 600 !important;
@@ -21,4 +25,9 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
+}
+
+.button a{
+  text-decoration: none;
+  color: #333;
 }

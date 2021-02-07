@@ -13,6 +13,7 @@ const theme = createMuiTheme(themeFile);
 export class App extends Component {
   state = {
     data: {},
+    isLoggedIn: false,
   };
 
   async componentDidMount() {
@@ -28,7 +29,7 @@ export class App extends Component {
           <Router>
             <Header />
             <Route exact path="/" render={() => <Cards data={data} />} />
-            <Route path="/create" component={SignUp} />
+            <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />
           </Router>
         </div>

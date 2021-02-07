@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { getFromStorage, setInStorage } from "../../util/storage";
+import { setInStorage } from "../../util/storage";
 import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./LogIn.module.css";
 
@@ -63,6 +63,7 @@ export class LogIn extends Component {
 
   render() {
     const { errors, loading } = this.state;
+
     return (
       <div>
         <Grid container className={styles.form}>
@@ -115,7 +116,7 @@ export class LogIn extends Component {
               </Button>
               <br />
               <small>
-                No account yet? <Link to="/create">Sign Up</Link>
+                No account yet? <Link to="/signup">Sign Up</Link>
               </small>
             </form>
             </Paper>
