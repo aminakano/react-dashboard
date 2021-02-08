@@ -21,19 +21,6 @@ export class App extends Component {
     const obj = getFromStorage("the_main_app");
     if (obj && obj.token) {
       const { token } = obj;
-      // fetch(`/api/users/verify?token=${token}`)
-      //   .then((res) => res.json())
-      //   .then((json) => {
-      //     if (json.success) {
-      //       this.setState({
-      //         isLoggedIn: true,
-      //       });
-      //     } else {
-      //       this.setState({
-      //         isLoggedIn: false,
-      //       });
-      //     }
-      //   });
       const response = await fetch(`/api/users/verify?token=${token}`);
       const status = await response.json();
       if (status.success) {
@@ -45,20 +32,19 @@ export class App extends Component {
           isLoggedIn: false,
         });
       }
-      console.log(status);
     }
-    console.log(this.state.isLoggedIn);
+
     const fetchedData = await fetchData();
     this.setState({ data: fetchedData });
   }
   render() {
-    const { data } = this.state;
-    console.log(this.state.isLoggedIn);
+    const { data, isLoggedIn } = this.state;
+
     return (
       <MuiThemeProvider theme={theme}>
         <div className={styles.container}>
           <Router>
-            <Header />
+            <Header loginStatus={isLoggedIn} />
             <Route exact path="/" render={() => <Cards data={data} />} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />

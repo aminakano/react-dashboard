@@ -5,19 +5,24 @@ import MenuIcon from '@material-ui/icons/Menu';
 import styles from "./Header.module.css";
 import img from "../../images/icon.png";
 
-const Header = (loginStatus) => {
+const Header = ({ loginStatus }) => {
   const loginBtn = <Link to="/login">Login</Link>;
   const signupBtn = <Link to="/signup">Sign Up</Link>;
   const logoutBtn = <Link to="/">Logout</Link>;
   const path = window.location.pathname;
+  const isLoggedIn = loginStatus;
 
-  const btn = path === "/login" ? signupBtn 
-      : path === "/signup" ? loginBtn
-      : logoutBtn;
+  let btn;
+  if(path === "/login") {
+    btn = signupBtn;
+  } else if(path === "/signup") {
+    btn = loginBtn
+  }
 
   const handleClick = e => {
     window.location.pathname = "/"
   }
+  // Todo: implement logout function
   return (
     <AppBar position="static" className={styles.header}>
       <Toolbar className={styles.toolbar}>
@@ -34,9 +39,10 @@ const Header = (loginStatus) => {
         <Grid container></Grid>
         <Grid container></Grid>
         <Grid container justify="flex-end">
-          <Button className={styles.button}>
-            {btn}
-          </Button>
+          {isLoggedIn ? <Button className={styles.button}>
+            {logoutBtn} </Button> 
+            : <Button className={styles.button}>{btn}</Button>
+          }
           <Grid item>
             <IconButton>
               <MenuIcon className={styles.menu}/>
