@@ -128,6 +128,8 @@ router.route("/login").post(async (req, res, next) => {
   User.find({ email }, async (err, users) => {
     const user = users[0];
     const passwordMatch = await bcrypt.compare(password, user.password);
+    console.log("email", email);
+    console.log("user", user);
 
     if (err) {
       console.log("err 2:", err);
@@ -152,6 +154,7 @@ router.route("/login").post(async (req, res, next) => {
     // Create userSession and generate token
     const userSession = new UserSession();
     userSession.userId = user._id;
+    userSession.userData = user.userData;
     userSession.save((err, doc) => {
       if (err) {
         console.log(err);
@@ -160,10 +163,12 @@ router.route("/login").post(async (req, res, next) => {
           message: "Error: Server error",
         });
       }
+      console.log("doc", doc);
       return res.send({
         success: true,
         message: "Valid sign in",
         token: doc._id,
+        userData: doc.userData,
       });
     });
   });

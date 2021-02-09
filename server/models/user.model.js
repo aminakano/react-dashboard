@@ -19,6 +19,16 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    userData: {
+      username: String,
+      holdings: [
+        {
+          id: String,
+          name: String,
+          amount: Number,
+        },
+      ],
+    },
   },
   {
     timestamps: true,

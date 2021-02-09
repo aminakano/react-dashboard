@@ -6,6 +6,7 @@ const userSessionSchema = new Schema(
   {
     userId: { type: String, default: "" },
     isDeleted: { type: Boolean, default: false },
+    userData: { type: Object, default: {} },
   },
   {
     timestamps: true,
