@@ -19,6 +19,17 @@ export class App extends Component {
   };
 
   async componentDidMount() {
+    // Check if there is a new_user token generated in signup page
+    const newUser = sessionStorage;
+    const key = Object.keys(newUser)[0];
+
+    if (newUser.length === 1 && key === "new_user") {
+      this.setState({
+        isLoggedIn: true,
+      });
+    }
+
+    // Check if the token is correct when logging in second time or later
     const obj = getFromStorage("the_main_app");
     if (obj && obj.token) {
       const { token } = obj;
@@ -42,6 +53,16 @@ export class App extends Component {
   }
 
   async logout(e) {
+    const newUser = sessionStorage;
+    const key = Object.keys(newUser)[0];
+    if (newUser.length === 1 && key === "new_user") {
+      this.setState({
+        isLoggedIn: false,
+      });
+      sessionStorage.removeItem("new_user");
+      window.location.pathname = "/login";
+    }
+
     const obj = getFromStorage("the_main_app");
     console.log("logout");
     if (obj && obj.token) {

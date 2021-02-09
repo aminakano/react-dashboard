@@ -44,8 +44,14 @@ export class SignUp extends Component {
           loading: false,
           errors: json.message,
       })
-      
-     return (json.success) ? window.location = "/" : null;
+     
+     if(json.success) {
+       // Generate a random number for a session token
+       const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
+       console.log(sessionToken);
+       sessionStorage.setItem("new_user", sessionToken[0]);
+       window.location = "/"
+     }
     })
     .catch(err => console.log(err))
   }
