@@ -44,6 +44,10 @@ And `id` should correspond to coin id and `name` a symbol of a currency. IDs and
 - Retrieve entire data from paginated API recursively. <https://dev.to/nirmal_kumar/retrieve-entire-data-from-paginated-api-recursively-3pl4>
 - Javascript: How to access the return value of a Promise object <https://dev.to/ramonak/javascript-how-to-access-the-return-value-of-a-promise-object-1bck>
 - How To Pass Props to Components Inside React Router <https://medium.com/javascript-in-plain-english/passing-props-to-components-inside-react-router-3d26165662b1>
+- Using fetch with async/await <https://dev.to/kishore007k/using-fetch-with-async-await-54od>
+- Passing a function as a prop in React <https://stackoverflow.com/questions/48852082/passing-a-function-as-a-prop-in-react>
+- React Functional Component with Hooks: Everything You Need To Know <https://www.devaradise.com/react-functional-component-with-hooks>
+- React Router Hooks - How To Use Them <https://dev.to/developer_buddy/react-router-dom-hooks-how-to-use-them-3a93>
 
 ## References (video)
 
