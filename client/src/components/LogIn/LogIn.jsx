@@ -1,71 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import { setInStorage } from "../../util/storage";
 import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./LogIn.module.css";
 
 
-export class LogIn extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {},
-      loading: false,
-      token: ""
-    };
+const LogIn = ({ data, loginAction, formChange }) => {
+
+  const { email, password, errors, loading, token } = data;
+  console.log(email, password, errors, loading);
+  
+  const handleChange = (event) => {
+    formChange(event)
   }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const {email, password} = this.state;
-
-    this.setState({
-      loading: true,
-    });
-
-    fetch("/api/users/login", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(json => {
-      console.log(`json: ${JSON.stringify(json)}`);
-      if(json.success) {
-        setInStorage("the_main_app", {token: json.token});
-        this.setState({
-          email: "",
-          password: "",
-          errors: json.message,
-          loading: false,
-          token: json.token,
-        })
-        return window.location = "/";
-      } else {
-        this.setState({
-          errors: json.message,
-          loading: false,
-        })
-      }
-    })
-    .catch(err => console.log(err))
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  render() {
-    const { errors, loading } = this.state;
-
-    return (
-      <div>
+  return (
+    <div>
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={9}>
@@ -73,7 +21,7 @@ export class LogIn extends Component {
               <Typography variant="h2" className={styles.pageTitle}>
                 Log In
               </Typography>
-              <form noValidate onSubmit={this.handleSubmit}>
+              <form noValidate onSubmit={() => loginAction()}>
               <TextField
                 id="email"
                 name="email"
@@ -82,8 +30,8 @@ export class LogIn extends Component {
                 helperText={errors.email}
                 error={errors.email ? true : false}
                 className={styles.TextField}
-                value={this.state.email}
-                onChange={this.handleChange}
+                value={email}
+                onChange={handleChange}
                 fullWidth
               />
               <TextField
@@ -94,15 +42,15 @@ export class LogIn extends Component {
                 helperText={errors.password}
                 error={errors.password ? true : false}
                 className={styles.TextField}
-                value={this.state.password}
-                onChange={this.handleChange}
+                value={password}
+                onChange={() => formChange()}
                 fullWidth
               />
-              {errors.general && (
+              {/* {errors.general && (
                 <Typography variant="body2" className={styles.customError}>
                   {errors.general}
                 </Typography>
-              )}
+              )} */}
               <Button
                 type="submit"
                 variant="contained"
@@ -124,8 +72,8 @@ export class LogIn extends Component {
           <Grid item sm />
         </Grid>
       </div>
-    )
-  }
+  )
 }
 
 export default LogIn
+
