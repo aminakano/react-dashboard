@@ -20,7 +20,6 @@ export class LogIn extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    const { setParentState } = this.props;
 
     this.setState({
       loading: true,
@@ -37,17 +36,13 @@ export class LogIn extends Component {
     .then(json => {
       console.log(`json: ${JSON.stringify(json)}`);
       if(json.success) {
-        setInStorage("the_main_app", {token: json.token});
+        setInStorage("the_main_app", {token: json.token, userData: json.userData});
         this.setState({
           email: "",
           password: "",
           errors: json.message,
           loading: false,
           token: json.token,
-        });
-        
-        setParentState({
-          userData: json.userData
         });
 
         return window.location = "/";

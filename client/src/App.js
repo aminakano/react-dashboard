@@ -34,7 +34,8 @@ export class App extends Component {
     try {
       const obj = getFromStorage("the_main_app");
       if (obj && obj.token) {
-        const { token } = obj;
+        const { token, userData } = obj;
+
         const response = await fetch(`/api/users/verify?token=${token}`);
         const status = await response.json();
 
@@ -42,6 +43,7 @@ export class App extends Component {
           this.setState({
             isLoggedIn: true,
             userSession: obj,
+            userData,
           });
         } else {
           this.setState({
@@ -55,7 +57,6 @@ export class App extends Component {
     } catch (error) {
       console.error(error);
     }
-    console.log(this.state.userData);
   }
 
   async logout(e) {
@@ -102,12 +103,7 @@ export class App extends Component {
             />
             <Route exact path="/" render={() => <Cards data={data} />} />
             <Route path="/signup" component={SignUp} />
-            <Route
-              path="/login"
-              render={() => (
-                <LogIn setParentState={(state) => this.setState(state)} />
-              )}
-            />
+            <Route path="/login" component={LogIn} />
           </Router>
         </div>
       </MuiThemeProvider>
