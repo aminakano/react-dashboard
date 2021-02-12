@@ -16,6 +16,7 @@ export class App extends Component {
     data: {},
     isLoggedIn: false,
     userSession: "",
+    userData: {},
   };
 
   async componentDidMount() {
@@ -30,26 +31,31 @@ export class App extends Component {
     }
 
     // Check if the token is correct when logging in second time or later
-    const obj = getFromStorage("the_main_app");
-    if (obj && obj.token) {
-      const { token } = obj;
-      const response = await fetch(`/api/users/verify?token=${token}`);
-      const status = await response.json();
+    try {
+      const obj = getFromStorage("the_main_app");
+      if (obj && obj.token) {
+        const { token } = obj;
+        const response = await fetch(`/api/users/verify?token=${token}`);
+        const status = await response.json();
 
-      if (status.success) {
-        this.setState({
-          isLoggedIn: true,
-          userSession: obj,
-        });
-      } else {
-        this.setState({
-          isLoggedIn: false,
-        });
+        if (status.success) {
+          this.setState({
+            isLoggedIn: true,
+            userSession: obj,
+          });
+        } else {
+          this.setState({
+            isLoggedIn: false,
+          });
+        }
+
+        const fetchedData = await fetchData();
+        this.setState({ data: fetchedData });
       }
+    } catch (error) {
+      console.error(error);
     }
-
-    const fetchedData = await fetchData();
-    this.setState({ data: fetchedData });
+    console.log(this.state.userData);
   }
 
   async logout(e) {
@@ -96,7 +102,12 @@ export class App extends Component {
             />
             <Route exact path="/" render={() => <Cards data={data} />} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={LogIn} />
+            <Route
+              path="/login"
+              render={() => (
+                <LogIn setParentState={(state) => this.setState(state)} />
+              )}
+            />
           </Router>
         </div>
       </MuiThemeProvider>

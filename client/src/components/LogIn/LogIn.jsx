@@ -6,8 +6,8 @@ import styles from "./LogIn.module.css";
 
 
 export class LogIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -19,7 +19,8 @@ export class LogIn extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {email, password} = this.state;
+    const { email, password } = this.state;
+    const { setParentState } = this.props;
 
     this.setState({
       loading: true,
@@ -43,7 +44,12 @@ export class LogIn extends Component {
           errors: json.message,
           loading: false,
           token: json.token,
-        })
+        });
+        
+        setParentState({
+          userData: json.userData
+        });
+
         return window.location = "/";
       } else {
         this.setState({
