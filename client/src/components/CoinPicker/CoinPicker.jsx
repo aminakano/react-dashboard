@@ -37,6 +37,7 @@ export class CoinPicker extends Component {
   
   render() {
     const { query, filteredData } = this.state;
+    console.log(filteredData);
     return (
       <>
         <FormControl>

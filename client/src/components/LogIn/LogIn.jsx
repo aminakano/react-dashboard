@@ -6,8 +6,8 @@ import styles from "./LogIn.module.css";
 
 
 export class LogIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -19,7 +19,7 @@ export class LogIn extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {email, password} = this.state;
+    const { email, password } = this.state;
 
     this.setState({
       loading: true,
@@ -36,14 +36,15 @@ export class LogIn extends Component {
     .then(json => {
       console.log(`json: ${JSON.stringify(json)}`);
       if(json.success) {
-        setInStorage("the_main_app", {token: json.token});
+        setInStorage("the_main_app", {token: json.token, userData: json.userData});
         this.setState({
           email: "",
           password: "",
           errors: json.message,
           loading: false,
           token: json.token,
-        })
+        });
+
         return window.location = "/";
       } else {
         this.setState({

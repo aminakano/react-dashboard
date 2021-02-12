@@ -16,6 +16,7 @@ export class App extends Component {
     data: {},
     isLoggedIn: false,
     userSession: "",
+    userData: {},
   };
 
   async componentDidMount() {
@@ -30,26 +31,32 @@ export class App extends Component {
     }
 
     // Check if the token is correct when logging in second time or later
-    const obj = getFromStorage("the_main_app");
-    if (obj && obj.token) {
-      const { token } = obj;
-      const response = await fetch(`/api/users/verify?token=${token}`);
-      const status = await response.json();
+    try {
+      const obj = getFromStorage("the_main_app");
+      if (obj && obj.token) {
+        const { token, userData } = obj;
 
-      if (status.success) {
-        this.setState({
-          isLoggedIn: true,
-          userSession: obj,
-        });
-      } else {
-        this.setState({
-          isLoggedIn: false,
-        });
+        const response = await fetch(`/api/users/verify?token=${token}`);
+        const status = await response.json();
+
+        if (status.success) {
+          this.setState({
+            isLoggedIn: true,
+            userSession: obj,
+            userData,
+          });
+        } else {
+          this.setState({
+            isLoggedIn: false,
+          });
+        }
+
+        const fetchedData = await fetchData();
+        this.setState({ data: fetchedData });
       }
+    } catch (error) {
+      console.error(error);
     }
-
-    const fetchedData = await fetchData();
-    this.setState({ data: fetchedData });
   }
 
   async logout(e) {
