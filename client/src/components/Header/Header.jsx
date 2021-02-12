@@ -7,7 +7,7 @@ import img from "../../images/icon.png";
 
 const Header = ({ loginStatus, token, logoutAction }) => {
   const isLoggedIn = loginStatus;
-  
+  console.log(token);
   let location = useLocation()
   const path = location.pathname;
 

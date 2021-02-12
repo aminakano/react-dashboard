@@ -15,7 +15,6 @@ export class App extends Component {
   state = {
     data: {},
     isLoggedIn: false,
-    userSession: "",
     userData: {},
   };
 
@@ -42,7 +41,6 @@ export class App extends Component {
         if (status.success) {
           this.setState({
             isLoggedIn: true,
-            userSession: obj,
             userData,
           });
         } else {
@@ -90,7 +88,7 @@ export class App extends Component {
     }
   }
   render() {
-    const { data, isLoggedIn, userSession } = this.state;
+    const { data, isLoggedIn, userData } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -98,7 +96,7 @@ export class App extends Component {
           <Router>
             <Header
               loginStatus={isLoggedIn}
-              token={userSession}
+              token={userData}
               logoutAction={(e) => this.logout(e)}
             />
             <Route exact path="/" render={() => <Cards data={data} />} />
