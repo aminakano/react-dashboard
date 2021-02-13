@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
+import { UserDialog } from "../../components";
 import { AppBar, Toolbar, Button, IconButton, Typography, Grid } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from "./Header.module.css";
@@ -8,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Header = ({ loginStatus, token, logoutAction }) => {
+  const [open, setOpen] = useState(false);
   const isLoggedIn = loginStatus;
   const { username } = token
   let location = useLocation()
@@ -26,6 +28,14 @@ const Header = ({ loginStatus, token, logoutAction }) => {
 
   const handleClick = e => {
     window.location.pathname = "/"
+  }
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
   }
   
   return (
@@ -46,7 +56,10 @@ const Header = ({ loginStatus, token, logoutAction }) => {
         <Grid container justify="flex-end" alignItems="center">
           {isLoggedIn ? 
             (<Grid item>
-              <Button className={styles.button2}>
+              <Button 
+                className={styles.button2}
+                onClick={handleOpen}
+                >
                 <FontAwesomeIcon
                   icon={faUserCircle}
                   size="3x"
@@ -54,6 +67,12 @@ const Header = ({ loginStatus, token, logoutAction }) => {
                 />
                 {username}
               </Button>
+              <UserDialog
+                username={username}
+                open={open}
+                logoutAction={() => logoutAction()}
+                handleClose={() => handleClose()}
+                 />
               <Button 
                 className={styles.button} 
                 onClick={() => logoutAction()}>
