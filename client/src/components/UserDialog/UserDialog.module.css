@@ -1,0 +1,23 @@
+.dialog {
+  padding: 2.5rem !important;
+}
+
+.title {
+  font-weight: bold !important;
+}
+
+.red {
+  color: red;
+}
+
+.bt {
+  border-top: 1px solid lightgray;
+}
+
+.menu {
+  padding: 0.5rem 0;
+}
+
+.menu:hover {
+  cursor: pointer;
+}

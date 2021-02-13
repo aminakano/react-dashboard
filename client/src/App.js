@@ -55,6 +55,7 @@ export class App extends Component {
     } catch (error) {
       console.error(error);
     }
+    console.log(this.state.userData);
   }
 
   async logout(e) {

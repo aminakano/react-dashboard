@@ -8,3 +8,4 @@ export { default as CoinPicker } from "./CoinPicker/CoinPicker";
 export { default as Chart } from "./Chart/Chart";
 export { default as SignUp } from "./SignUp/SignUp";
 export { default as LogIn } from "./LogIn/LogIn";
+export { default as UserDialog } from "./UserDialog/UserDialog";

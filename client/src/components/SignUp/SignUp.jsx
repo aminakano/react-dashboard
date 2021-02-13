@@ -39,7 +39,6 @@ export class SignUp extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log("json", json);
       this.setState({
           loading: false,
           errors: json.message,
