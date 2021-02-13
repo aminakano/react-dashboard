@@ -4,6 +4,8 @@ import { AppBar, Toolbar, Button, IconButton, Typography, Grid } from "@material
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from "./Header.module.css";
 import img from "../../images/icon.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Header = ({ loginStatus, token, logoutAction }) => {
   const isLoggedIn = loginStatus;
@@ -43,9 +45,15 @@ const Header = ({ loginStatus, token, logoutAction }) => {
         <Grid container></Grid>
         <Grid container justify="flex-end" alignItems="center">
           {isLoggedIn ? 
-            (
-            <Grid item>
-              <Button className={styles.button2}>{username}</Button>
+            (<Grid item>
+              <Button className={styles.button2}>
+                <FontAwesomeIcon
+                  icon={faUserCircle}
+                  size="3x"
+                  className={styles.avatar}
+                />
+                {username}
+              </Button>
               <Button 
                 className={styles.button} 
                 onClick={() => logoutAction()}>

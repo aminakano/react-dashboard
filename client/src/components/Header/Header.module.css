@@ -35,4 +35,10 @@
 .button2 {
   text-transform: unset !important;
   font-size: 1rem !important;
+  font-weight: bold !important;
+}
+
+.avatar {
+  margin-right: 0.5rem;
+  color: #727cf5;
 }
