@@ -7,7 +7,7 @@ import img from "../../images/icon.png";
 
 const Header = ({ loginStatus, token, logoutAction }) => {
   const isLoggedIn = loginStatus;
-  console.log(token);
+  const { username } = token
   let location = useLocation()
   const path = location.pathname;
 
@@ -41,13 +41,17 @@ const Header = ({ loginStatus, token, logoutAction }) => {
         <Grid container></Grid>
         <Grid container></Grid>
         <Grid container></Grid>
-        <Grid container justify="flex-end">
+        <Grid container justify="flex-end" alignItems="center">
           {isLoggedIn ? 
-            (<Button 
-              className={styles.button} 
-              onClick={() => logoutAction()}>
-              {logoutBtn}
-            </Button>) 
+            (
+            <Grid item>
+              <Button className={styles.button2}>{username}</Button>
+              <Button 
+                className={styles.button} 
+                onClick={() => logoutAction()}>
+                {logoutBtn}
+              </Button>
+            </Grid>) 
               : 
             <Button className={styles.button}>{btn}</Button>
           }
