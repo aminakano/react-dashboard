@@ -73,6 +73,7 @@ router.route("/signup").post(async (req, res, next) => {
 
   newUser.email = email;
   newUser.username = username;
+  newUser.userData.username = username;
   newUser.password = newUser.generateHash(password);
 
   newUser.save((err, user) => {
