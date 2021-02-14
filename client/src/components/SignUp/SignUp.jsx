@@ -16,43 +16,54 @@ export class SignUp extends Component {
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     
     this.setState({
       loading: true,
     });
 
-    const newUserData = {
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-      username: this.state.username,
-    };
+    try {
+      const newUserData = {
+        email: this.state.email,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+        username: this.state.username,
+      };
 
-    fetch("/api/users/signup", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUserData)
-    })
-    .then(res => res.json())
-    .then(json => {
-      this.setState({
-          loading: false,
-          errors: json.message,
-      })
-     
-     if(json.success) {
-       // Generate a random number for a session token
-       const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
-       console.log(sessionToken);
-       sessionStorage.setItem("new_user", sessionToken[0]);
-       window.location = "/"
-     }
-    })
-    .catch(err => console.log(err))
+      const params = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUserData)
+      }
+      const response = await fetch("/api/users/signup", params);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const json = await response.json();
+        console.log(`json: ${JSON.stringify(json)}`);
+        if(json.success) {
+          // Generate a random number for a session token
+          const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
+          console.log(sessionToken);
+          sessionStorage.setItem("new_user", sessionToken[0]);
+          // window.location = "/"
+          setTimeout(() => { window.location = "/" }, 1000);
+
+        } else {
+          this.setState({
+            errors: json.message,
+            loading: false,
+          })
+        }
+      }
+      
+    } catch (error) {
+      console.error(error)
+    }
+
   }
 
   handleChange = (event) => {
