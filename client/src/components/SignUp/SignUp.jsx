@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, CircularProgress, Grid, Typography, Paper, Snackbar } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 import styles from "./SignUp.module.css";
 
 export class SignUp extends Component {
@@ -12,47 +13,63 @@ export class SignUp extends Component {
       confirmPassword: "",
       username: "",
       errors: {},
-      loading: false
+      loading: false,
+      open: false
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     
     this.setState({
       loading: true,
     });
 
-    const newUserData = {
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-      username: this.state.username,
-    };
+    try {
+      const newUserData = {
+        email: this.state.email,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+        username: this.state.username,
+      };
 
-    fetch("/api/users/signup", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUserData)
-    })
-    .then(res => res.json())
-    .then(json => {
-      this.setState({
-          loading: false,
-          errors: json.message,
-      })
-     
-     if(json.success) {
-       // Generate a random number for a session token
-       const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
-       console.log(sessionToken);
-       sessionStorage.setItem("new_user", sessionToken[0]);
-       window.location = "/"
-     }
-    })
-    .catch(err => console.log(err))
+      const params = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUserData)
+      }
+      const response = await fetch("/api/users/signup", params);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const json = await response.json();
+        console.log(`json: ${JSON.stringify(json)}`);
+        if(json.success) {
+          // Generate a random number for a session token
+          const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
+
+          sessionStorage.setItem("new_user", sessionToken[0]);
+          sessionStorage.setItem("username", newUserData.username);
+
+          this.setState({
+            open: true
+          })
+
+          setTimeout(() => { window.location = "/" }, 1000);
+
+        } else {
+          this.setState({
+            errors: json.message,
+            loading: false,
+          })
+        }
+      }
+      
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   handleChange = (event) => {
@@ -61,9 +78,14 @@ export class SignUp extends Component {
     });
   }
   render() {
-    const { errors, loading } = this.state;
+    const { errors, loading, open, username } = this.state;
     return (
       <div>
+        <Snackbar open={open} autoHideDuration={6000}>
+          <MuiAlert severity="success">
+            {`Welcome ${username}!`}
+          </MuiAlert>
+        </Snackbar>
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={5}>

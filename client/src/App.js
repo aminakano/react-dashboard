@@ -23,9 +23,13 @@ export class App extends Component {
     const newUser = sessionStorage;
     const key = Object.keys(newUser)[0];
 
-    if (newUser.length === 1 && key === "new_user") {
+    const userObj = {};
+    userObj.username = newUser.username;
+
+    if (newUser.length === 2 && key === "new_user") {
       this.setState({
         isLoggedIn: true,
+        userData: userObj,
       });
     }
 
@@ -55,13 +59,12 @@ export class App extends Component {
     } catch (error) {
       console.error(error);
     }
-    console.log(this.state.userData);
   }
 
   async logout(e) {
     const newUser = sessionStorage;
     const key = Object.keys(newUser)[0];
-    if (newUser.length === 1 && key === "new_user") {
+    if (newUser.length === 2 && key === "new_user") {
       this.setState({
         isLoggedIn: false,
       });
