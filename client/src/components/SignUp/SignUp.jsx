@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, CircularProgress, Grid, Typography, Paper, Snackbar } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 import styles from "./SignUp.module.css";
 
 export class SignUp extends Component {
@@ -12,7 +13,8 @@ export class SignUp extends Component {
       confirmPassword: "",
       username: "",
       errors: {},
-      loading: false
+      loading: false,
+      open: false
     };
   }
 
@@ -47,9 +49,14 @@ export class SignUp extends Component {
         if(json.success) {
           // Generate a random number for a session token
           const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
-          console.log(sessionToken);
+
           sessionStorage.setItem("new_user", sessionToken[0]);
-          // window.location = "/"
+          sessionStorage.setItem("username", newUserData.username);
+
+          this.setState({
+            open: true
+          })
+
           setTimeout(() => { window.location = "/" }, 1000);
 
         } else {
@@ -63,7 +70,6 @@ export class SignUp extends Component {
     } catch (error) {
       console.error(error)
     }
-
   }
 
   handleChange = (event) => {
@@ -72,9 +78,14 @@ export class SignUp extends Component {
     });
   }
   render() {
-    const { errors, loading } = this.state;
+    const { errors, loading, open, username } = this.state;
     return (
       <div>
+        <Snackbar open={open} autoHideDuration={6000}>
+          <MuiAlert severity="success">
+            {`Welcome ${username}!`}
+          </MuiAlert>
+        </Snackbar>
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={5}>
