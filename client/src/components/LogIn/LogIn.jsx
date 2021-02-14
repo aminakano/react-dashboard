@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { setInStorage } from "../../util/storage";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, CircularProgress, Grid, Typography, Paper, Snackbar } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 import styles from "./LogIn.module.css";
 
 
@@ -13,11 +14,12 @@ export class LogIn extends Component {
       password: "",
       errors: {},
       loading: false,
-      token: ""
+      token: "",
+      open: false
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
 
@@ -25,35 +27,43 @@ export class LogIn extends Component {
       loading: true,
     });
 
-    fetch("/api/users/login", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(json => {
-      console.log(`json: ${JSON.stringify(json)}`);
-      if(json.success) {
-        setInStorage("the_main_app", {token: json.token, userData: json.userData});
-        this.setState({
-          email: "",
-          password: "",
-          errors: json.message,
-          loading: false,
-          token: json.token,
-        });
-
-        return window.location = "/";
-      } else {
-        this.setState({
-          errors: json.message,
-          loading: false,
-        })
+    try {
+      const params = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
       }
-    })
-    .catch(err => console.log(err))
+      const response = await fetch("/api/users/login", params);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const json = await response.json();
+        console.log(`json: ${JSON.stringify(json)}`);
+        if(json.success) {
+          setInStorage("the_main_app", { token: json.token, userData: json.userData });
+          this.setState({
+            email: "",
+            password: "",
+            errors: json.message,
+            loading: false,
+            token: json.token,
+            open: true
+          });
+          setTimeout(() => { window.location = "/" }, 1000);
+
+        } else {
+          this.setState({
+            errors: json.message,
+            loading: false,
+          })
+        }
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   handleChange = (event) => {
@@ -63,10 +73,15 @@ export class LogIn extends Component {
   }
 
   render() {
-    const { errors, loading } = this.state;
+    const { errors, loading, open } = this.state;
 
     return (
       <div>
+        <Snackbar open={open} autoHideDuration={6000}>
+          <MuiAlert severity="success">
+            Successfully logged in!
+          </MuiAlert>
+        </Snackbar>
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={9}>

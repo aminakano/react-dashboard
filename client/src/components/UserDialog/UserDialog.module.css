@@ -1,5 +1,5 @@
 .dialog {
-  padding: 2.5rem !important;
+  padding: 2.5rem 0 !important;
 }
 
 .title {
@@ -11,11 +11,12 @@
 }
 
 .bt {
-  border-top: 1px solid lightgray;
+  border-top: 1px solid lightgray !important;
 }
 
 .menu {
   padding: 0.5rem 0;
+  /* font-weight: 600 !important; */
 }
 
 .menu:hover {
