@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper, Snackbar } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
+import { MessageToast } from "../../components";
+import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./SignUp.module.css";
 
 export class SignUp extends Component {
@@ -45,7 +45,6 @@ export class SignUp extends Component {
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
         const json = await response.json();
-        console.log(`json: ${JSON.stringify(json)}`);
         if(json.success) {
           // Generate a random number for a session token
           const sessionToken = window.crypto.getRandomValues(new Uint32Array(1))
@@ -81,11 +80,11 @@ export class SignUp extends Component {
     const { errors, loading, open, username } = this.state;
     return (
       <div>
-        <Snackbar open={open} autoHideDuration={6000}>
-          <MuiAlert severity="success">
-            {`Welcome ${username}!`}
-          </MuiAlert>
-        </Snackbar>
+        <MessageToast 
+          open={open}
+          severity="success"
+          message={`Welcome ${username}!`}
+        />
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={5}>
