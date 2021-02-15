@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { MessageToast } from "../../components";
 import { setInStorage } from "../../util/storage";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper, Snackbar } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
+import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
 import styles from "./LogIn.module.css";
 
 
@@ -77,11 +77,11 @@ export class LogIn extends Component {
 
     return (
       <div>
-        <Snackbar open={open} autoHideDuration={6000}>
-          <MuiAlert severity="success">
-            Successfully logged in!
-          </MuiAlert>
-        </Snackbar>
+        <MessageToast 
+          open={open}
+          severity="success"
+          message="Successfully logged in!"
+        />
         <Grid container className={styles.form}>
           <Grid item sm />
           <Grid item sm md={9}>

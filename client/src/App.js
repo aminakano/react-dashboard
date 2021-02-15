@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
-import { Cards, Header, SignUp, LogIn } from "./components";
+import { Cards, Header, SignUp, LogIn, MessageToast } from "./components";
 import { getFromStorage } from "./util/storage";
 
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ export class App extends Component {
     data: {},
     isLoggedIn: false,
     userData: {},
+    open: false,
   };
 
   async componentDidMount() {
@@ -81,9 +82,13 @@ export class App extends Component {
       if (status.success) {
         this.setState({
           isLoggedIn: false,
+          open: true,
         });
         localStorage.removeItem("the_main_app");
-        window.location.pathname = "/login";
+
+        setTimeout(() => {
+          window.location.pathname = "/login";
+        }, 1000);
       } else {
         this.setState({
           isLoggedIn: false,
@@ -92,7 +97,7 @@ export class App extends Component {
     }
   }
   render() {
-    const { data, isLoggedIn, userData } = this.state;
+    const { data, isLoggedIn, userData, open } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -107,6 +112,11 @@ export class App extends Component {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />
           </Router>
+          <MessageToast
+            open={open}
+            severity="success"
+            message="See you next time!"
+          />
         </div>
       </MuiThemeProvider>
     );
