@@ -26,12 +26,12 @@ const UserDialog = ({ username, open, handleClose, logoutAction }) => {
         <Typography variant="h5" align="center" gutterBottom className={styles.title}>{myUser}</Typography>
         <List>
           <ListItem button className={styles.bt}>
-            <Typography variant="h6" className={`${styles.menu}`}>Settings</Typography>
+            <Typography variant="body1" className={`${styles.menu}`}>Settings</Typography>
           </ListItem>
           <ListItem button className={styles.bt}>
             <Typography 
               className={`${styles.red} ${styles.menu}`}
-              variant="h6" 
+              variant="body1" 
               onClick={() => logoutAction()}>
               Log out
             </Typography>

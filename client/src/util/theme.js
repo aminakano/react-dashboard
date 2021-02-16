@@ -1,10 +1,10 @@
 export const themeFile = {
   typography: {
-    fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+    fontFamily: ["Mukta", "sans-serif"].join(","),
   },
   palette: {
     text: {
-      primary: "#333"
-    }
-  }
+      primary: "#333",
+    },
+  },
 };
