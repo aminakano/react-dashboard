@@ -11,3 +11,5 @@ client/.eslintcache
 client/7.3.0
 .vscode
 .env
+.eslintcache
+.DS_Store
