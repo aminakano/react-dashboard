@@ -51,8 +51,19 @@ export const fetchMyHoldings = async () => {
   }
 };
 
+export const fetchDailyChartData = async () => {
+  try {
+    const { data } = await axios.get(
+      `${url}/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
+    );
+    return data.prices;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 // Test functions
 // (async () => {
-//   const entireList = await fetchMyHoldings();
+//   const entireList = await fetchDailyChartData();
 //   console.log(entireList);
 // })();
