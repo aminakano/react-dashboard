@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Dialog, DialogTitle, DialogContent } from "@material-ui/core";
-import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker, Chart } from "../../components";
+import { EmbedTwitter, TableCard, Coin, AssetTable, CoinPicker, Chart, LineChart } from "../../components";
 import { filterArr } from "../../api/methods";
-import { fetchMyHoldings } from "../../api";
+import { fetchMyHoldings, fetchDailyChartData } from "../../api";
 import img from "../../images/icon.png";
 
 import styles from "./Cards.module.css";
@@ -16,10 +16,17 @@ const Cards = ({ data }) => {
   const [open, setOpen] = useState(false);
   const [coin, setCoin] = useState("swissborg");
   const [holdingTokens, setHoldingTokens] = useState(null);
+  const [myArr, setMyArr] = useState([])
   useEffect(() => {
     const fetchAPI = async () => setHoldingTokens(await fetchMyHoldings());
     fetchAPI();
   },[setHoldingTokens]);
+  useEffect(() => {
+    const fetchAPI = async() => setMyArr(await fetchDailyChartData())
+    fetchAPI()
+  }, [])
+  console.log(myArr);
+
 
   if(!data || !holdingTokens) {
     return "Loading..."
@@ -96,23 +103,23 @@ const Cards = ({ data }) => {
        
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Portfolio</Typography>
-          {/* <CardContent> */}
+          <CardContent className={styles.chartSetting}>
             <Chart arr={filteredArr} />
-          {/* </CardContent> */}
+          </CardContent>
         </Grid>
         
-        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+        <Grid item component={Card} xs={12} md={3} lg={6}className={styles.card}>
+          <Typography variant="h5" className={styles.title}>Bitcoin Prices</Typography>
+          <CardContent className={styles.chartSetting}>
+            <LineChart arr={myArr}/>
+          </CardContent>
+        </Grid>
+        {/* <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
             <Typography variant="h5">This is my card</Typography>
             <Typography variant="body2">Hey!</Typography>
           </CardContent>
-        </Grid>
-        <Grid item component={Card} xs={12} md={3} className={styles.card}>
-          <CardContent>
-            <Typography variant="h5">This is my card</Typography>
-            <Typography variant="body2">Hey!</Typography>
-          </CardContent>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   )

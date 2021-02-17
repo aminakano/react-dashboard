@@ -3,6 +3,7 @@ import { defaults, Doughnut } from "react-chartjs-2";
 // import styles from "./Chart.module.css";
 
 defaults.global.defaultFontFamily = "Mukta";
+defaults.global.maintainAspectRatio = false;
 
 const Chart = ({ arr }) => {
   const bgcolor = ["#727cf5",
@@ -31,7 +32,6 @@ const Chart = ({ arr }) => {
         }]
       }}
       options={{
-        maintainAspectRatio: false,
         legend: { 
           display: true, 
           position: "bottom", 
