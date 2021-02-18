@@ -1,7 +1,8 @@
 body {
   font-family: "Mukta", sans-serif;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   color: #333;
 }
 
@@ -41,7 +42,6 @@ ol[role='list'] {
   flex-direction: column;
   height: 100vh;
   margin-top: 4rem;
-  padding-bottom: 6rem !important;
 }
 
 @media (max-width: 770px) {

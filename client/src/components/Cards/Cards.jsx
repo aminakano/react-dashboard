@@ -50,7 +50,7 @@ const Cards = ({ data }) => {
   
   return (
     <div className={styles.container}>
-      <Grid container spacing={3} justify="center">
+      <Grid container spacing={3} justify="center" className={styles.pb}>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
             <Typography variant="h5" className={styles.title}>Portfolio</Typography>
             <Chart arr={filteredArr} />
