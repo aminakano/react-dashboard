@@ -6,6 +6,10 @@
   background-color: #f9fafb;
 }
 
+.pb {
+  padding-bottom: 4rem !important;
+}
+
 .card {
   margin: 2% 1% auto !important;
   height: 500px;
