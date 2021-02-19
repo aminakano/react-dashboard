@@ -84,7 +84,7 @@ const Cards = ({ data }) => {
             <Coin coinName={coin} />
           </CardContent>
         </Grid>
-         <Grid item component={Card} xs={12} md={3} className={styles.card}>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <CardContent>
             <EmbedTwitter id="NexoFinance" name="Nexo"/>
           </CardContent>
@@ -100,7 +100,6 @@ const Cards = ({ data }) => {
             <img src={img} alt="Diamond" />
           </CardContent>
         </Grid>
-       
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Portfolio</Typography>
           <CardContent className={styles.chartSetting}>
@@ -120,6 +119,21 @@ const Cards = ({ data }) => {
             <Typography variant="body2">Hey!</Typography>
           </CardContent>
         </Grid> */}
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <Typography variant="h5" className={styles.title}>Today's Crypto Prices</Typography>
+          <TableCard arr={arr}/>
+        </Grid>
+        <Grid item xs={12} md={3} component={Card} className={styles.card}>
+          <Typography variant="h5" className={styles.title}>Today's Crypto Prices</Typography>
+          <TableCard arr={arr}/>
+        </Grid>
+        <Grid item component={Card} xs={12} md={3} className={styles.card}>
+          <CardContent>
+            <Typography variant="h5" className={styles.title}>This is my card</Typography>
+            <Typography variant="body2">Hey!</Typography>
+            <img src={img} alt="Diamond" />
+          </CardContent>
+        </Grid>
       </Grid>
     </div>
   )
