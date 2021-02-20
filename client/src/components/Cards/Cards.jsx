@@ -25,7 +25,7 @@ const Cards = ({ data }) => {
     const fetchAPI = async() => setMyArr(await fetchDailyChartData())
     fetchAPI()
   }, [])
-  console.log(myArr);
+
 
 
   if(!data || !holdingTokens) {

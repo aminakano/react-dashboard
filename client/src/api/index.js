@@ -56,14 +56,34 @@ export const fetchDailyChartData = async () => {
     const { data } = await axios.get(
       `${url}/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
     );
+    let coins = myHoldings.map((obj) => obj.id);
+    console.log(coins);
+    console.log(data);
     return data.prices;
   } catch (err) {
     console.error(err);
   }
 };
 
+export const fetchDailyChartData2 = () => {
+  try {
+    const coins = myHoldings.map((obj) => obj.id);
+    coins.map((coin) => {
+      fetch(
+        `${url}/${coin}/market_chart?vs_currency=usd&days=30&interval=daily`
+      )
+        .then((data) => data.json())
+        .then((json) => console.log(json));
+    });
+
+    // let idsParam = coins.join(",");
+    // console.log(idsParam);
+  } catch (error) {}
+};
+
 // Test functions
-// (async () => {
-//   const entireList = await fetchDailyChartData();
-//   console.log(entireList);
-// })();
+(async () => {
+  const entireList = await fetchDailyChartData2();
+  return entireList;
+  // console.log(entireList);
+})();
