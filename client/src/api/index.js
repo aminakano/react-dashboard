@@ -56,34 +56,44 @@ export const fetchDailyChartData = async () => {
     const { data } = await axios.get(
       `${url}/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
     );
-    let coins = myHoldings.map((obj) => obj.id);
-    console.log(coins);
-    console.log(data);
+
     return data.prices;
   } catch (err) {
     console.error(err);
   }
 };
 
-export const fetchDailyChartData2 = () => {
+export const fetchDailyChartData2 = async () => {
   try {
     const coins = myHoldings.map((obj) => obj.id);
-    coins.map((coin) => {
-      fetch(
-        `${url}/${coin}/market_chart?vs_currency=usd&days=30&interval=daily`
-      )
-        .then((data) => data.json())
-        .then((json) => console.log(json));
-    });
+    const aggregatedData = [];
 
-    // let idsParam = coins.join(",");
-    // console.log(idsParam);
-  } catch (error) {}
+    for (let i = 0; i < coins.length; i++) {
+      await axios
+        .get(
+          `${url}${coins[i]}/market_chart?vs_currency=usd&days=30&interval=daily`
+        )
+        .then((data) => aggregatedData.push(data.data.prices));
+    }
+    const sb = aggregatedData[0];
+    for (let i = 0; i < sb.length; i++) {
+      sb[i][0] = sb[i][0] * myHoldings[0].amount;
+    }
+
+    const newSB = sb.map((item) => {
+      return item[1] * 51188.15;
+    });
+    console.log(newSB);
+    console.log(myHoldings[0].amount);
+    return aggregatedData;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Test functions
 (async () => {
   const entireList = await fetchDailyChartData2();
-  return entireList;
-  // console.log(entireList);
+  // return entireList;
+  console.log(entireList);
 })();
