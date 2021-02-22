@@ -56,34 +56,58 @@ export const fetchDailyChartData = async () => {
     const { data } = await axios.get(
       `${url}/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
     );
-    let coins = myHoldings.map((obj) => obj.id);
-    console.log(coins);
-    console.log(data);
+
     return data.prices;
   } catch (err) {
     console.error(err);
   }
 };
 
-export const fetchDailyChartData2 = () => {
+export const calcMyHoldings = async () => {
   try {
     const coins = myHoldings.map((obj) => obj.id);
-    coins.map((coin) => {
-      fetch(
-        `${url}/${coin}/market_chart?vs_currency=usd&days=30&interval=daily`
-      )
-        .then((data) => data.json())
-        .then((json) => console.log(json));
-    });
+    const dateAndPrices = [];
 
-    // let idsParam = coins.join(",");
-    // console.log(idsParam);
-  } catch (error) {}
+    for (let i = 0; i < coins.length; i++) {
+      await axios
+        .get(
+          `${url}${coins[i]}/market_chart?vs_currency=usd&days=30&interval=daily`
+        )
+        .then((data) => dateAndPrices.push(data.data.prices));
+    }
+    // create a set of dates
+    const timestamps = [];
+    dateAndPrices[0].forEach((item) => timestamps.push(item[0]));
+    const dateSet = new Set(timestamps);
+
+    console.log(dateSet);
+    // const newArr = [];
+    // for(let i = 0; i < dateAndPrices.length; i++) {
+    //   const eachCoin = dateAndPrices[i];
+    //   for (let j = 0; j < eachCoin.length; j++) {
+
+    //   }
+    // }
+    console.log(dateAndPrices);
+    // const sb = dateAndPrices[0];
+    // for (let i = 0; i < sb.length; i++) {
+    //   sb[i][0] = sb[i][0] * myHoldings[0].amount;
+    // }
+
+    // const newSB = sb.map((item) => {
+    //   return item[1] * 51188.15;
+    // });
+    // console.log(newSB);
+    // console.log(myHoldings[0].amount);
+    return dateAndPrices;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Test functions
 (async () => {
-  const entireList = await fetchDailyChartData2();
-  return entireList;
-  // console.log(entireList);
+  const entireList = await calcMyHoldings();
+  // return entireList;
+  console.log(entireList);
 })();
