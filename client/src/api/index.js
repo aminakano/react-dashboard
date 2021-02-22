@@ -63,29 +63,43 @@ export const fetchDailyChartData = async () => {
   }
 };
 
-export const fetchDailyChartData2 = async () => {
+export const calcMyHoldings = async () => {
   try {
     const coins = myHoldings.map((obj) => obj.id);
-    const aggregatedData = [];
+    const dateAndPrices = [];
 
     for (let i = 0; i < coins.length; i++) {
       await axios
         .get(
           `${url}${coins[i]}/market_chart?vs_currency=usd&days=30&interval=daily`
         )
-        .then((data) => aggregatedData.push(data.data.prices));
+        .then((data) => dateAndPrices.push(data.data.prices));
     }
-    const sb = aggregatedData[0];
-    for (let i = 0; i < sb.length; i++) {
-      sb[i][0] = sb[i][0] * myHoldings[0].amount;
-    }
+    // create a set of dates
+    const timestamps = [];
+    dateAndPrices[0].forEach((item) => timestamps.push(item[0]));
+    const dateSet = new Set(timestamps);
 
-    const newSB = sb.map((item) => {
-      return item[1] * 51188.15;
-    });
-    console.log(newSB);
-    console.log(myHoldings[0].amount);
-    return aggregatedData;
+    console.log(dateSet);
+    // const newArr = [];
+    // for(let i = 0; i < dateAndPrices.length; i++) {
+    //   const eachCoin = dateAndPrices[i];
+    //   for (let j = 0; j < eachCoin.length; j++) {
+
+    //   }
+    // }
+    console.log(dateAndPrices);
+    // const sb = dateAndPrices[0];
+    // for (let i = 0; i < sb.length; i++) {
+    //   sb[i][0] = sb[i][0] * myHoldings[0].amount;
+    // }
+
+    // const newSB = sb.map((item) => {
+    //   return item[1] * 51188.15;
+    // });
+    // console.log(newSB);
+    // console.log(myHoldings[0].amount);
+    return dateAndPrices;
   } catch (err) {
     console.error(err);
   }
@@ -93,7 +107,7 @@ export const fetchDailyChartData2 = async () => {
 
 // Test functions
 (async () => {
-  const entireList = await fetchDailyChartData2();
+  const entireList = await calcMyHoldings();
   // return entireList;
   console.log(entireList);
 })();
