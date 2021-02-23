@@ -80,15 +80,19 @@ export const calcMyHoldings = async () => {
     dateAndPrices[0].forEach((item) => timestamps.push(item[0]));
     const dateSet = new Set(timestamps);
 
-    console.log(dateSet);
-    // const newArr = [];
-    // for(let i = 0; i < dateAndPrices.length; i++) {
-    //   const eachCoin = dateAndPrices[i];
-    //   for (let j = 0; j < eachCoin.length; j++) {
+    const aggr = (myData, [...mySet], [...myHoldings]) => {
+      console.log(myHoldings);
+      console.log(`dateSet inside loop: ${mySet[0]}`);
+      myData.forEach((coin, i) => {
+        coin.forEach((data, j) => {
+          // console.log(`dateSet inside loop: ${mySet}`);
+          if (data[0] === mySet[0]) console.log(data[1]);
+        });
+      });
+    };
 
-    //   }
-    // }
-    console.log(dateAndPrices);
+    aggr(dateAndPrices, dateSet, myHoldings);
+
     // const sb = dateAndPrices[0];
     // for (let i = 0; i < sb.length; i++) {
     //   sb[i][0] = sb[i][0] * myHoldings[0].amount;
