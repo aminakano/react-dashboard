@@ -80,25 +80,42 @@ export const calcMyHoldings = async () => {
     dateAndPrices[0].forEach((item) => timestamps.push(item[0]));
     const dateSet = new Set(timestamps);
 
-    console.log(dateSet);
-    // const newArr = [];
-    // for(let i = 0; i < dateAndPrices.length; i++) {
-    //   const eachCoin = dateAndPrices[i];
-    //   for (let j = 0; j < eachCoin.length; j++) {
+    const aggr = (myData, [...mySet], [...myHoldings]) => {
+      let count = 0;
+      let newArr = [[]];
 
-    //   }
-    // }
-    console.log(dateAndPrices);
-    // const sb = dateAndPrices[0];
-    // for (let i = 0; i < sb.length; i++) {
-    //   sb[i][0] = sb[i][0] * myHoldings[0].amount;
-    // }
+      myData.forEach((coin, i) => {
+        coin.forEach((data, j) => {
+          if (data[0] === mySet[0]) console.log(data[1] * myHoldings[i].amount);
 
-    // const newSB = sb.map((item) => {
-    //   return item[1] * 51188.15;
-    // });
-    // console.log(newSB);
-    // console.log(myHoldings[0].amount);
+          newArr[0][0] = data[1];
+        });
+        count += 1;
+      });
+    };
+
+    aggr(dateAndPrices, dateSet, myHoldings);
+
+    const aggr2 = (myData, [...mySet], [...myHoldings]) => {
+      console.log(`dateSet inside loop: ${mySet[0]}`);
+      let count = 0;
+      let newArr = [[]];
+
+      myData.forEach((coin, i) => {
+        if (coin[0][0] === mySet[0]) {
+          console.log(coin[0][1] * myHoldings[i].amount);
+          count += coin[0][1] * myHoldings[i].amount;
+          newArr[0][0] = mySet[0];
+          newArr[0][1] = count;
+        }
+      });
+      console.log(count);
+
+      // newArr[1] = count;
+      console.log(newArr);
+    };
+    aggr2(dateAndPrices, dateSet, myHoldings);
+
     return dateAndPrices;
   } catch (err) {
     console.error(err);
