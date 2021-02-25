@@ -53,7 +53,9 @@ const Cards = ({ data }) => {
       <Grid container spacing={3} justify="center" className={styles.pb}>
         <Grid item component={Card} xs={12} md={3} className={styles.card}>
             <Typography variant="h5" className={styles.title}>Portfolio</Typography>
-            <Chart arr={filteredArr} />
+            <CardContent className={styles.chartSetting}>
+              <Chart arr={filteredArr} />
+            </CardContent>
         </Grid>
         <Grid item component={Card} xs={12} md={3} lg={4} xl={3} className={styles.card}>
           <Typography variant="h5" className={styles.title}>Your Assets</Typography>

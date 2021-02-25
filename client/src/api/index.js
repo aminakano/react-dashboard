@@ -66,55 +66,68 @@ export const fetchDailyChartData = async () => {
 export const calcMyHoldings = async () => {
   try {
     const coins = myHoldings.map((obj) => obj.id);
-    const dateAndPrices = [];
+    const dateAndPrices = {};
 
     for (let i = 0; i < coins.length; i++) {
       await axios
         .get(
           `${url}${coins[i]}/market_chart?vs_currency=usd&days=30&interval=daily`
         )
-        .then((data) => dateAndPrices.push(data.data.prices));
-    }
-    // create a set of dates
-    const timestamps = [];
-    dateAndPrices[0].forEach((item) => timestamps.push(item[0]));
-    const dateSet = new Set(timestamps);
-
-    const aggr = (myData, [...mySet], [...myHoldings]) => {
-      let count = 0;
-      let newArr = [[]];
-
-      myData.forEach((coin, i) => {
-        coin.forEach((data, j) => {
-          if (data[0] === mySet[0]) console.log(data[1] * myHoldings[i].amount);
-
-          newArr[0][0] = data[1];
+        .then(({ data }) => {
+          dateAndPrices[coins[i]] = { ...data.prices };
         });
-        count += 1;
-      });
-    };
+    }
 
-    aggr(dateAndPrices, dateSet, myHoldings);
+    // create a set of dates
 
-    const aggr2 = (myData, [...mySet], [...myHoldings]) => {
-      console.log(`dateSet inside loop: ${mySet[0]}`);
-      let count = 0;
-      let newArr = [[]];
+    // e.g. Object.keys(obj.swissborg).length can get the length of an object
+    const mydates = [];
+    for (let coin in dateAndPrices) {
+      if (Object.keys(dateAndPrices[coin]).length === 31)
+        mydates.push(dateAndPrices[coin]);
+    }
 
-      myData.forEach((coin, i) => {
-        if (coin[0][0] === mySet[0]) {
-          console.log(coin[0][1] * myHoldings[i].amount);
-          count += coin[0][1] * myHoldings[i].amount;
-          newArr[0][0] = mySet[0];
-          newArr[0][1] = count;
-        }
-      });
-      console.log(count);
+    const mth = mydates[0];
+    const newarr = [];
+    for (let day in mth) {
+      newarr.push(mth[day][0]);
+    }
+    const timestamps = new Set(newarr);
+    console.log(timestamps);
 
-      // newArr[1] = count;
-      console.log(newArr);
-    };
-    aggr2(dateAndPrices, dateSet, myHoldings);
+    // const aggr = (myData, [...mySet], [...myHoldings]) => {
+    //   let count = 0;
+    //   let newArr = [[]];
+
+    //   myData.forEach((coin, i) => {
+    //     coin.forEach((data, j) => {
+    //       if (data[0] === mySet[0]) console.log(data[1] * myHoldings[i].amount);
+
+    //       newArr[0][0] = data[1];
+    //     });
+    //     count += 1;
+    //   });
+    // };
+
+    // aggr(dateAndPrices, dateSet, myHoldings);
+
+    // const aggr2 = (myData, [...mySet], [...myHoldings]) => {
+    //   console.log(`dateSet inside loop: ${mySet}`);
+    //   let count = 0;
+    //   let newArr = [[]];
+
+    //   myData.forEach((coin, i) => {
+    //     if (coin[i][0] === mySet[0]) {
+    //       console.log(coin[0][1] * myHoldings[i].amount);
+    //       count += coin[i][1] * myHoldings[i].amount;
+    //       newArr[i][0] = mySet[i];
+    //       newArr[i][1] = count;
+    //     }
+    //   });
+    //   console.log(count);
+    //   console.log(newArr);
+    // };
+    // aggr2(dateAndPrices, dateSet, myHoldings);
 
     return dateAndPrices;
   } catch (err) {
