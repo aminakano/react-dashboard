@@ -66,7 +66,6 @@ export const fetchDailyChartData = async () => {
 const getTimestamps = async (dateAndPrices) => {
   // create a set of dates
 
-  // e.g. Object.keys(obj.swissborg).length can get the length of an object
   const mydates = [];
   for (let coin in dateAndPrices) {
     if (Object.keys(dateAndPrices[coin]).length === 31)
@@ -97,14 +96,6 @@ export const calcMyHoldings = async () => {
           dateAndPrices[coins[i]] = data.prices;
         });
     }
-
-    // const obj = {};
-    // Object.entries(dateAndPrices).forEach((elem, i) => {
-    //   obj[i] = elem[1][0];
-    //   // console.log(elem[1]);
-    //   // console.log(elem[1][0]);
-    // });
-    // console.log(obj);
 
     // const aggr = (myData, [...mySet], [...myHoldings]) => {
     //   let count = 0;
@@ -154,19 +145,19 @@ export const calcMyHoldings = async () => {
 
   // get timestamps
   let timestamps = getTimestamps(entireList);
-
+  console.log(timestamps);
   // iterate over timestamps
   let totals = {};
   (await timestamps).forEach((t, i) => {
     let amount = 0;
     Object.entries(entireList).forEach((arr, i) => {
-      console.log(arr[1]);
+      // console.log(arr[1]);
       let value = arr[1].find((a) => a[0] === t);
-      console.log(value);
+      // console.log(value);
       if (value) {
         let price = value[1];
         let balance = myHoldings.find((balance) => balance.id === arr[0]);
-        console.log(balance);
+        // console.log(balance);
         amount += price * balance.amount;
       }
     });
