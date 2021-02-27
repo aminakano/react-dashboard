@@ -63,6 +63,25 @@ export const fetchDailyChartData = async () => {
   }
 };
 
+const getTimestamps = async (dateAndPrices) => {
+  // create a set of dates
+
+  const mydates = [];
+  for (let coin in dateAndPrices) {
+    if (Object.keys(dateAndPrices[coin]).length === 31)
+      mydates.push(dateAndPrices[coin]);
+    break;
+  }
+
+  const mth = mydates[0];
+  const newarr = [];
+  for (let day in mth) {
+    newarr.push(mth[day][0]);
+  }
+  const timestamps = new Set(newarr);
+  return timestamps;
+};
+
 export const calcMyHoldings = async () => {
   try {
     const coins = myHoldings.map((obj) => obj.id);
@@ -74,26 +93,9 @@ export const calcMyHoldings = async () => {
           `${url}${coins[i]}/market_chart?vs_currency=usd&days=30&interval=daily`
         )
         .then(({ data }) => {
-          dateAndPrices[coins[i]] = { ...data.prices };
+          dateAndPrices[coins[i]] = data.prices;
         });
     }
-
-    // create a set of dates
-
-    // e.g. Object.keys(obj.swissborg).length can get the length of an object
-    const mydates = [];
-    for (let coin in dateAndPrices) {
-      if (Object.keys(dateAndPrices[coin]).length === 31)
-        mydates.push(dateAndPrices[coin]);
-    }
-
-    const mth = mydates[0];
-    const newarr = [];
-    for (let day in mth) {
-      newarr.push(mth[day][0]);
-    }
-    const timestamps = new Set(newarr);
-    console.log(timestamps);
 
     // const aggr = (myData, [...mySet], [...myHoldings]) => {
     //   let count = 0;
@@ -140,4 +142,26 @@ export const calcMyHoldings = async () => {
   const entireList = await calcMyHoldings();
   // return entireList;
   console.log(entireList);
+
+  // get timestamps
+  let timestamps = getTimestamps(entireList);
+  console.log(timestamps);
+  // iterate over timestamps
+  let totals = {};
+  (await timestamps).forEach((t, i) => {
+    let amount = 0;
+    Object.entries(entireList).forEach((arr, i) => {
+      // console.log(arr[1]);
+      let value = arr[1].find((a) => a[0] === t);
+      // console.log(value);
+      if (value) {
+        let price = value[1];
+        let balance = myHoldings.find((balance) => balance.id === arr[0]);
+        // console.log(balance);
+        amount += price * balance.amount;
+      }
+    });
+    totals[t] = amount;
+  });
+  console.log(totals);
 })();
