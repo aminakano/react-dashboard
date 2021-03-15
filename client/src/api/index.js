@@ -118,8 +118,13 @@ export const calcMyHoldings = async () => {
     let amount = 0;
     Object.entries(entireList).forEach((arr, i) => {
       // console.log(arr[1]);
-      let value = arr[1].find((a) => a[0] === t);
-      // console.log(value);
+      const today = arr[1].find(
+        (a) =>
+          new Date(a[0]).toLocaleDateString() ===
+          new Date(t).toLocaleDateString()
+      );
+      let value = arr[1].find((a) => a[0] === t) || today;
+      console.log(value);
       if (value) {
         let price = value[1];
         let balance = myHoldings.find((balance) => balance.id === arr[0]);
