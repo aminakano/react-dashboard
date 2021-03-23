@@ -3,6 +3,8 @@ import { myHoldings } from "./myData";
 
 const url = "https://api.coingecko.com/api/v3/coins/";
 // const firstTenResult =  "&per_page=10&page=1"
+
+// fetch top 150 tokens data
 export const fetchData = async () => {
   try {
     const { data } = await axios.get(
@@ -15,6 +17,7 @@ export const fetchData = async () => {
   }
 };
 
+// fetch coin data for a specific token
 export const fetchCoinData = async (coin) => {
   try {
     const { data } = await axios.get(`${url}${coin}`);
@@ -25,16 +28,18 @@ export const fetchCoinData = async (coin) => {
   }
 };
 
+// fetch a list of all tokens
 export const fetchCoins = async () => {
   try {
     const { data } = await axios.get(`${url}list`);
-
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
   }
 };
 
+// fetch my holdings of token - should be connected to db
 export const fetchMyHoldings = async () => {
   try {
     let coins = myHoldings.map((obj) => obj.id);
@@ -107,7 +112,7 @@ export const calcMyHoldings = async () => {
 (async () => {
   const entireList = await calcMyHoldings();
   // return entireList;
-  console.log(entireList);
+  // console.log(entireList);
 
   // get timestamps
   let timestamps = getTimestamps(entireList);
@@ -118,7 +123,12 @@ export const calcMyHoldings = async () => {
     let amount = 0;
     Object.entries(entireList).forEach((arr, i) => {
       // console.log(arr[1]);
-      let value = arr[1].find((a) => a[0] === t);
+      const today = arr[1].find(
+        (a) =>
+          new Date(a[0]).toLocaleDateString() ===
+          new Date(t).toLocaleDateString()
+      );
+      let value = arr[1].find((a) => a[0] === t) || today;
       // console.log(value);
       if (value) {
         let price = value[1];
@@ -129,5 +139,5 @@ export const calcMyHoldings = async () => {
     });
     totals[t] = amount;
   });
-  console.log(totals);
+  // console.log(totals);
 })();
