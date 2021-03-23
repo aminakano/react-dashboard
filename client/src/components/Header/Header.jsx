@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { UserDialog } from "../../components";
-import { AppBar, Toolbar, Button, IconButton, Typography, Grid } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Button, Typography, Grid } from "@material-ui/core";
 import styles from "./Header.module.css";
 import img from "../../images/icon.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -82,11 +81,6 @@ const Header = ({ loginStatus, token, logoutAction }) => {
               : 
             <Button className={styles.button}>{btn}</Button>
           }
-          <Grid item>
-            <IconButton>
-              <MenuIcon className={styles.menu}/>
-            </IconButton>
-          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>
