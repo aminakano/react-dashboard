@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
-import { Cards, Header, SignUp, LogIn, MessageToast } from "./components";
+import {
+  Cards,
+  Header,
+  SignUp,
+  LogIn,
+  Settings,
+  MessageToast,
+} from "./components";
 import { getFromStorage } from "./util/storage";
 
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
@@ -111,6 +118,7 @@ export class App extends Component {
             <Route exact path="/" render={() => <Cards data={data} />} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />
+            <Route path="/settings" component={Settings} />
           </Router>
           <MessageToast
             open={open}
