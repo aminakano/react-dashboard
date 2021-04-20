@@ -11,3 +11,4 @@ export { default as SignUp } from "./SignUp/SignUp";
 export { default as LogIn } from "./LogIn/LogIn";
 export { default as UserDialog } from "./UserDialog/UserDialog";
 export { default as MessageToast } from "./MessageToast/MessageToast";
+export { default as Settings } from "./Settings/Settings";

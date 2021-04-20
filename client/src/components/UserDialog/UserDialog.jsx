@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import styles from "./UserDialog.module.css";
 
 import { Typography, Dialog, DialogContent, List, ListItem } from "@material-ui/core";
@@ -26,7 +27,11 @@ const UserDialog = ({ username, open, handleClose, logoutAction }) => {
         <Typography variant="h5" align="center" gutterBottom className={styles.title}>{myUser}</Typography>
         <List>
           <ListItem button className={styles.bt}>
-            <Typography variant="body1" className={`${styles.menu}`}>Settings</Typography>
+            <Typography variant="body1" className={`${styles.menu}`}>
+              <Link to="/settings">
+                <span onClick={() => handleClose()}>Settings</span>
+              </Link>
+            </Typography>
           </ListItem>
           <ListItem button className={styles.bt}>
             <Typography 
