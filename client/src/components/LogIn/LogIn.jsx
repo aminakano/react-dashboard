@@ -90,51 +90,51 @@ export class LogIn extends Component {
                 Log In
               </Typography>
               <form noValidate onSubmit={this.handleSubmit}>
-              <TextField
-                id="email"
-                name="email"
-                type="email"
-                label="Email"
-                helperText={errors.email}
-                error={errors.email ? true : false}
-                className={styles.TextField}
-                value={this.state.email}
-                onChange={this.handleChange}
-                fullWidth
-              />
-              <TextField
-                id="password"
-                name="password"
-                type="password"
-                label="Password"
-                helperText={errors.password}
-                error={errors.password ? true : false}
-                className={styles.TextField}
-                value={this.state.password}
-                onChange={this.handleChange}
-                fullWidth
-              />
-              {errors.general && (
-                <Typography variant="body2" className={styles.customError}>
-                  {errors.general}
-                </Typography>
-              )}
-              <Button
-                type="submit"
-                variant="contained"
-                className={styles.button}
-                disabled={loading}
-              >
-                Log In
-                {loading && (
-                  <CircularProgress className={styles.progress} size={30} />
-                 )}
-              </Button>
-              <br />
-              <small>
-                No account yet? <Link to="/signup">Sign Up</Link>
-              </small>
-            </form>
+                <TextField
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  helperText={errors.email}
+                  error={errors.email ? true : false}
+                  className={styles.TextField}
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  fullWidth
+                />
+                <TextField
+                  id="password"
+                  name="password"
+                  type="password"
+                  label="Password"
+                  helperText={errors.password}
+                  error={errors.password ? true : false}
+                  className={styles.TextField}
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  fullWidth
+                />
+                {errors.general && (
+                  <Typography variant="body2" className={styles.customError}>
+                    {errors.general}
+                  </Typography>
+                )}
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className={styles.button}
+                  disabled={loading}
+                >
+                  Log In
+                  {loading && (
+                    <CircularProgress className={styles.progress} size={30} />
+                  )}
+                </Button>
+                <br />
+                <small>
+                  No account yet? <Link to="/signup">Sign Up</Link>
+                </small>
+              </form>
             </Paper>
           </Grid>
           <Grid item sm />
