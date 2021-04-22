@@ -1,0 +1,7 @@
+
+@media screen and (min-width: 1024px) {
+  .paper {
+    padding: 2rem !important;
+    min-width: 750px;
+  }
+}
