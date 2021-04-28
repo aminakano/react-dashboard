@@ -7,9 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 
-const UserDialog = ({ username, open, handleClose, logoutAction }) => {
+const UserDialog = ({ open, handleClose, logoutAction, token }) => {
   const openState = open;
-  const myUser = username; 
+  const { username, holdings } = token;
+  console.log(username);
+  console.log(holdings);
   return (
     <Dialog
       open={openState}
@@ -24,7 +26,7 @@ const UserDialog = ({ username, open, handleClose, logoutAction }) => {
             className={styles.avatar}
           />
         </Typography>
-        <Typography variant="h5" align="center" gutterBottom className={styles.title}>{myUser}</Typography>
+        <Typography variant="h5" align="center" gutterBottom className={styles.title}>{username}</Typography>
         <List>
           <ListItem button className={styles.bt}>
             <Typography variant="body1" className={`${styles.menu}`}>

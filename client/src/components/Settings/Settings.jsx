@@ -1,7 +1,9 @@
 import styles from "./Settings.module.css";
-import { TextField, Button, CircularProgress, Grid, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, CircularProgress, Grid, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
-const Settings = () => {
+const Settings = ({ token }) => {
+  const { holdings } = token;
+  console.log(holdings);
   return (
     <div>
       <Grid container>
@@ -23,6 +25,29 @@ const Settings = () => {
               // onChange={this.handleChange}
               fullWidth
             />
+            <TableContainer>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell><Typography variant="subtitle1">Name</Typography></TableCell>
+                    <TableCell><Typography variant="subtitle1">Holdings</Typography></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {holdings.map((item, i) => (
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">
+                        {item.id}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {item.amount}
+                        {item.name.toUpperCase()}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
             <h3>Price chart to Follow</h3>
             <TextField
               id="price"

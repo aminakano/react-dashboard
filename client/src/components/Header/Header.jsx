@@ -10,7 +10,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 const Header = ({ loginStatus, token, logoutAction }) => {
   const [open, setOpen] = useState(false);
   const isLoggedIn = loginStatus;
-  const { username } = token
+  const userData = token;
   let location = useLocation()
   const path = location.pathname;
 
@@ -64,10 +64,10 @@ const Header = ({ loginStatus, token, logoutAction }) => {
                   size="3x"
                   className={styles.avatar}
                 />
-                {username}
+                {userData.username}
               </Button>
               <UserDialog
-                username={username}
+                token={userData}
                 open={open}
                 logoutAction={() => logoutAction()}
                 handleClose={() => handleClose()}
