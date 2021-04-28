@@ -116,7 +116,7 @@ export const calcMyHoldings = async () => {
 
   // get timestamps
   let timestamps = getTimestamps(entireList);
-  console.log(timestamps);
+  // console.log(timestamps);
   // iterate over timestamps
   let totals = {};
   (await timestamps).forEach((t, i) => {

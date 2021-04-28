@@ -21,21 +21,21 @@ const TableCard = ({ arr }) => {
             <TableRow key={i}>
               <TableCell component="th" scope="row">{i+1}.</TableCell>
               <TableCell component="th" scope="row">
-              <Grid container wrap="nowrap" alignItems="center">
-                <Grid item>
-                  <img src={item.image} className={styles.image} alt="crypto logo"/>
-                </Grid>
-                <Grid container direction="column">
+                <Grid container wrap="nowrap" alignItems="center">
                   <Grid item>
-                    <Typography variant="subtitle1">
-                      {item.name}
-                    </Typography>
+                    <img src={item.image} className={styles.image} alt="crypto logo"/>
                   </Grid>
-                  <Grid item>
-                    {item.symbol.toUpperCase()}
+                  <Grid container direction="column">
+                    <Grid item>
+                      <Typography variant="subtitle1">
+                        {item.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      {item.symbol.toUpperCase()}
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
               </TableCell>
               <TableCell component="th" scope="row">
                 ${item.current_price.toLocaleString()}

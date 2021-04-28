@@ -118,7 +118,10 @@ export class App extends Component {
             <Route exact path="/" render={() => <Cards data={data} />} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />
-            <Route path="/settings" component={Settings} />
+            <Route
+              path="/settings"
+              render={() => <Settings token={userData} />}
+            />
           </Router>
           <MessageToast
             open={open}
