@@ -3,7 +3,7 @@ import { TextField, Button, CircularProgress, Grid, Typography, Paper, Table, Ta
 
 const Settings = ({ token }) => {
   const { holdings } = token;
-  console.log(holdings);
+  console.log(token);
   return (
     <div>
       <Grid container>
