@@ -46,6 +46,7 @@ export class App extends Component {
       const obj = getFromStorage("the_main_app");
       if (obj && obj.token) {
         const { token, userData } = obj;
+        console.log(obj, "obj");
 
         const response = await fetch(`/api/users/verify?token=${token}`);
         const status = await response.json();

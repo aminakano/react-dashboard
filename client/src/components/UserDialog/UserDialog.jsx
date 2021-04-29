@@ -10,8 +10,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 const UserDialog = ({ open, handleClose, logoutAction, token }) => {
   const openState = open;
   const { username, holdings } = token;
-  console.log(username);
-  console.log(holdings);
+
   return (
     <Dialog
       open={openState}
