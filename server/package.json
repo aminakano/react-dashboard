@@ -23,6 +23,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "ws": "3.3.2"
+    "ws": "5.2.3"
   }
 }
