@@ -4,7 +4,7 @@
 
 # React Dashboard
 
-This is a dashboard application using React. The purpose of this app is to display and manage your holdings of cryptocurrencies and visualise with charts and tables. I chose CoinGecko API for an endpoint of this app since it is easy to use, free and API key is not required. (test
+This is a dashboard application using React. The purpose of this app is to display and manage your holdings of cryptocurrencies and visualise with charts and tables. I chose CoinGecko API for an endpoint of this app since it is easy to use, free and API key is not required.
 
 #### CoinGecko API
 
